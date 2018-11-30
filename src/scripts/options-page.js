@@ -1,5 +1,5 @@
-var Options = (function () {
-  var OPT_1 = 'opt-1';
+const Options = (function () {
+  const OPT_1 = 'opt-1';
   const OPT_2 = 'opt-2';
   const OPT_LOCAL_OPTIONS = 'localOptions';
   const OPT_FILE_NAME = 'fileName';
