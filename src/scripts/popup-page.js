@@ -1,7 +1,7 @@
 const Popup = (function () {
   const init = function (bg) {
-    document.getElementById('bt-options')
-      .addEventListener('click', _openOptionsPage);
+    const btOptions = document.getElementById('bt-options');
+    btOptions.addEventListener('click', _openOptionsPage);
   };
 
   const _openOptionsPage = function () {

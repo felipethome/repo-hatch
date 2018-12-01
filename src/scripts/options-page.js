@@ -4,6 +4,8 @@ const Options = (function () {
   const OPT_LOCAL_OPTIONS = 'localOptions';
   const OPT_FILE_NAME = 'fileName';
   const OPT_FILE_DATA_URL = 'data';
+  const OPT_NOTIFICATION = 'enableNotifications';
+  const OPT_BADGE = 'showBadge';
 
   // 500 KB
   const FILE_SIZE = 512000;
@@ -88,7 +90,7 @@ const Options = (function () {
     const text = getById('text-field').value;
     const options = Bg.getOptions();
   
-    options[OPT_1] = text || options[OPT_TIME];
+    options[OPT_1] = text || options[OPT_1];
 
     Bg.saveOptions(options);
     _showSavedText('saved-text');
