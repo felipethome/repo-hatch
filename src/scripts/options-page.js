@@ -1,11 +1,10 @@
 const Options = (function () {
-  const OPT_1 = 'opt-1';
-  const OPT_2 = 'opt-2';
+  const OPT_TEXT = 'text';
+  const OPT_NOTIFICATION = 'enableNotifications';
+  const OPT_BADGE = 'showBadge';
   const OPT_LOCAL_OPTIONS = 'localOptions';
   const OPT_FILE_NAME = 'fileName';
   const OPT_FILE_DATA_URL = 'data';
-  const OPT_NOTIFICATION = 'enableNotifications';
-  const OPT_BADGE = 'showBadge';
 
   // 500 KB
   const FILE_SIZE = 512000;
@@ -33,15 +32,15 @@ const Options = (function () {
 
     getById("bt-save").addEventListener('click', _saveTextFields);
 
-    getById("toggle-1").addEventListener('change', function () {
+    getById("notification").addEventListener('change', function () {
       const options = Bg.getOptions();
-      options[OPT_2] = this.checked;
+      options[OPT_NOTIFICATION] = this.checked;
       Bg.saveOptions(options);
     });
 
-    getById("toggle-2").addEventListener('change', function () {
+    getById("badge").addEventListener('change', function () {
       const options = Bg.getOptions();
-      options[OPT_3] = this.checked;
+      options[OPT_BADGE] = this.checked;
       Bg.saveOptions(options);
     });
 
@@ -90,7 +89,7 @@ const Options = (function () {
     const text = getById('text-field').value;
     const options = Bg.getOptions();
   
-    options[OPT_1] = text || options[OPT_1];
+    options[OPT_TEXT] = text || options[OPT_TEXT];
 
     Bg.saveOptions(options);
     _showSavedText('saved-text');
@@ -100,9 +99,9 @@ const Options = (function () {
     const getById = document.getElementById.bind(document);
     const options = Bg.getOptions();
 
-    getById('text-field').value = options[OPT_1].toString();
-    getById('toggle-1').checked = options[OPT_2];
-    getById('toggle-2').checked = options[OPT_3];
+    getById('text-field').value = options[OPT_TEXT].toString();
+    getById('notification').checked = options[OPT_NOTIFICATION];
+    getById('badge').checked = options[OPT_BADGE];
 
     if (options[OPT_LOCAL_OPTIONS]) {
       const localOptions = options[OPT_LOCAL_OPTIONS];

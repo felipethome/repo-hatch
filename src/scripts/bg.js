@@ -1,15 +1,12 @@
 const BgCtrl = (function () {
-  const OPT_1 = 'opt-1';
-  const OPT_2 = 'opt-2';
+  const OPT_TEXT = 'text';
+  const OPT_NOTIFICATION = 'enableNotifications';
+  const OPT_BADGE = 'showBadge';
   const OPT_LOCAL_OPTIONS = 'localOptions';
   const OPT_FILE_NAME = 'fileName';
   const OPT_FILE_DATA_URL = 'data';
-  const OPT_NOTIFICATION = 'enableNotifications';
-  const OPT_BADGE = 'showBadge';
 
   const NOTIFICATION_ICON = 'img/icon.png';
-
-  const COLOR_RED = {color: '#B71C1C'};
 
   const _options;
   const _currOpt;
@@ -17,9 +14,9 @@ const BgCtrl = (function () {
   const getDefaultOptions = function () {
     const defaultOptions = {};
 
-    defaultOptions[OPT_1] = 'default opt 1';
-    defaultOptions[OPT_2] = true;
-    defaultOptions[OPT_3] = false;
+    defaultOptions[OPT_TEXT] = '-';
+    defaultOptions[OPT_NOTIFICATION] = false;
+    defaultOptions[OPT_BADGE] = false;
 
     return defaultOptions;
   };
@@ -31,9 +28,9 @@ const BgCtrl = (function () {
   const _cloneOptions = function (options) {
     const optionsClone = {};
 
-    optionsClone[OPT_1] = options[OPT_1];
-    optionsClone[OPT_2] = options[OPT_2];
-    optionsClone[OPT_3] = options[OPT_3];
+    optionsClone[OPT_TEXT] = options[OPT_TEXT];
+    optionsClone[OPT_NOTIFICATION] = options[OPT_NOTIFICATION];
+    optionsClone[OPT_BADGE] = options[OPT_BADGE];
 
     if (options[OPT_LOCAL_OPTIONS]) {
       const localOptionsClone = {};
@@ -93,7 +90,7 @@ const BgCtrl = (function () {
     }
   };
 
-  const _updateBadge = function (text, color) {
+  const _updateBadge = function (text, color = {color: '#B71C1C'}) {
     let textStr = text;
     if (typeof textStr !== 'string') textStr = textStr.toString();
 
