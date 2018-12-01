@@ -4,14 +4,14 @@ const Options = (function () {
   const OPT_BADGE = 'showBadge';
   const OPT_LOCAL_OPTIONS = 'localOptions';
   const OPT_FILE_NAME = 'fileName';
-  const OPT_FILE_DATA_URL = 'data';
+  const OPT_FILE_DATA = 'data';
 
   // 500 KB
   const FILE_SIZE = 512000;
 
   const TIMEOUT_SAVED_TEXT = 2500;
 
-  const Bg;
+  let Bg;
 
   const init = function (backgroundPage) {
     Bg = backgroundPage.BgCtrl;
@@ -67,13 +67,21 @@ const Options = (function () {
         if (!options[OPT_LOCAL_OPTIONS]) options[OPT_LOCAL_OPTIONS] = {};
 
         options[OPT_LOCAL_OPTIONS][OPT_FILE_NAME] = fileName;
-        options[OPT_LOCAL_OPTIONS][OPT_FILE_DATA_URL] = this.result;
+        options[OPT_LOCAL_OPTIONS][OPT_FILE_DATA] = this.result;
         Bg.saveOptions(options);
       };
 
       fileReader.onerror = function (error) {
         console.error(error);
       };
+    });
+
+    // Donation.
+    getById('bt-ask-donation').addEventListener('click', function () {
+      getById('dialog-donation').classList.remove('hidden');
+    });
+    getById('backdrop-donation').addEventListener('click', function () {
+      getById('dialog-donation').classList.add('hidden');
     });
   };
 
@@ -86,6 +94,7 @@ const Options = (function () {
   };
 
   const _saveTextFields = function () {
+    const getById = document.getElementById.bind(document);
     const text = getById('text-field').value;
     const options = Bg.getOptions();
   

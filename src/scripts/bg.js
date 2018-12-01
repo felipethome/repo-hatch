@@ -4,12 +4,12 @@ const BgCtrl = (function () {
   const OPT_BADGE = 'showBadge';
   const OPT_LOCAL_OPTIONS = 'localOptions';
   const OPT_FILE_NAME = 'fileName';
-  const OPT_FILE_DATA_URL = 'data';
+  const OPT_FILE_DATA = 'data';
 
   const NOTIFICATION_ICON = 'img/icon.png';
 
-  const _options;
-  const _currOpt;
+  let _options;
+  let _currOpt;
 
   const getDefaultOptions = function () {
     const defaultOptions = {};
@@ -115,7 +115,7 @@ const BgCtrl = (function () {
 })();
 
 (function () {
-  const options = {};
+  let options = {};
 
   // Notice the Storage promises will never be rejected.
   Storage.get(BgCtrl.getDefaultOptions(), 'sync')
@@ -142,3 +142,5 @@ const BgCtrl = (function () {
       });
     });
 })();
+
+window.BgCtrl = BgCtrl;
