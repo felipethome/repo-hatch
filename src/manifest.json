@@ -26,6 +26,9 @@
   "background": {
     "page": "bg.html"
   },
+  "omnibox": {
+    "keyword": "gh"
+  },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
