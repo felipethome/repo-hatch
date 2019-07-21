@@ -7,20 +7,32 @@
   "repository": "https://github.com/felipethome",
   "homepage": "https://github.com/felipethome",
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "del": "^3.0.0",
-    "eslint": "^4.1.1",
-    "fancy-log": "^1.3.2",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.14.2",
+    "fancy-log": "^1.3.3",
     "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.9.2",
-    "gulp-if": "^2.0.2",
-    "gulp-uglify": "^3.0.0",
     "gulp-zip": "^4.1.0",
-    "uglify-es": "^3.3.4"
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
   },
   "scripts": {
     "build": "NODE_ENV='production' gulp build",
-    "dev": "gulp dev",
+    "dev": "webpack",
     "lint": "eslint --quiet src/*"
   },
-  "dependencies": {}
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
 }

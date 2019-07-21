@@ -76,3 +76,5 @@ const Storage = (function () {
     remove,
   };
 })();
+
+export default Storage;

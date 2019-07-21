@@ -1,3 +1,6 @@
+import config from './config';
+import Storage from './storage';
+
 const BgCtrl = (function () {
   const OPT_TEXT = 'text';
   const OPT_NOTIFICATION = 'enableNotifications';

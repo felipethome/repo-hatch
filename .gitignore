@@ -1,3 +1,5 @@
 node_modules
+resources/scripts
 build
-src/scripts/config.js
+build.zip
+src/config.js
