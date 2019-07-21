@@ -1,4 +1,4 @@
-# Extension seed
+# Dev Extension
 
 ## Build Production Version
 
