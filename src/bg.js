@@ -1,5 +1,5 @@
-import config from './config';
-import Storage from './storage';
+import config from './Config';
+import Storage from './Storage';
 
 const BgCtrl = (function () {
   const OPT_TEXT = 'text';

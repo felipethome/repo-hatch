@@ -10,13 +10,13 @@ module.exports = {
   watch: true,
   entry: {
     bg: [
-      `${scriptsPath}/bg.js`,
+      `${scriptsPath}/Bg.js`,
     ],
     'options-page': [
-      `${scriptsPath}/options-page.js`,
+      `${scriptsPath}/OptionsPage.js`,
     ],
     'popup-page': [
-      `${scriptsPath}/popup-page.js`,
+      `${scriptsPath}/PopupPage.js`,
     ],
     vendors: [
       'react',
