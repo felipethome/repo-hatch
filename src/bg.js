@@ -122,7 +122,7 @@ const BgCtrl = (function () {
  }
 
   const ghFetch = function (path, options = {}, fullPath = false) {
-    const token = window.config.token;
+    const token = config.token;
     const opt = Object.assign({}, options);
     opt.headers = Object.assign({
       'Content-Type': 'application/json',
