@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const scriptsPath = './src/';
 const outputFolder = 'resources';
 
 module.exports = {
@@ -10,19 +9,13 @@ module.exports = {
   watch: true,
   entry: {
     bg: [
-      `${scriptsPath}/Bg.js`,
+      './src/Bg.js',
     ],
     'options-page': [
-      `${scriptsPath}/OptionsPage.js`,
+      './src/OptionsPage/index.js',
     ],
     'popup-page': [
-      `${scriptsPath}/PopupPage.js`,
-    ],
-    vendors: [
-      'react',
-      'react-dom',
-      'classnames',
-      'prop-types',
+      './src/PopupPage/index.js',
     ],
   },
   output: {
@@ -61,18 +54,6 @@ module.exports = {
         ],
       },
     ],
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          chunks: "initial",
-          test: "vendor",
-          name: "vendor",
-          enforce: true
-        }
-      }
-    }
   },
   plugins: [
     // Do not emit compiled assets that include errors.
