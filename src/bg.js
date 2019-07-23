@@ -115,6 +115,8 @@ const Bg = (function () {
     init,
     getDefaultOptions,
     getDefaultLocalOptions,
+    getOptions,
+    saveOptions,
     update,
     getAllOrgs,
   };
