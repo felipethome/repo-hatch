@@ -13,7 +13,7 @@ export default class OptionsPage extends React.Component {
   };
 
   componentDidMount() {
-    GitHub.getAllOrgs().then((orgs) => {
+    GitHub.updateOrgs().then((orgs) => {
       this.setState(() => ({orgs}));
     });
   }
@@ -33,7 +33,7 @@ export default class OptionsPage extends React.Component {
 
     this.setLoadingState(orgName, true);
 
-    GitHub.getAllOrgRepos(e.currentTarget.id)
+    GitHub.updateAllOrgRepos(e.currentTarget.id)
       .then((repos) => {
         this.setState((previousState) => ({
           reposBySource: Object.assign(previousState.reposBySource, {orgName: repos}),
@@ -54,6 +54,7 @@ export default class OptionsPage extends React.Component {
           <div className={classes.optionsSection}>
             <h2>Organizations</h2>
             <div className={classes.card}>
+              <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
               {orgs.map((org) => (
                 <div className={classes.orgContainer} key={org.login}>
                   <img className={classes.orgImage} src={org.avatarUrl} />
