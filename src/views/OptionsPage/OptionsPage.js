@@ -24,7 +24,7 @@ export default class OptionsPage extends React.Component {
     GitHub.updateUser()
       .then((user) => {
         newState.user = user;
-        return GitHub.updateOrgs;
+        return GitHub.updateOrgs();
       })
       .then((orgs) => {
         newState.orgs = orgs;
@@ -141,6 +141,7 @@ export default class OptionsPage extends React.Component {
             <h2>Organizations</h2>
             <div className={classes.card}>
               {this.buildRepoSourceEntry(user)}
+              {orgs.map(this.buildRepoSourceEntry)}
             </div>
           </div>
         </div>

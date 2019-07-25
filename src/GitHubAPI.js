@@ -54,7 +54,7 @@ const getUserRepos = function () {
   return getAllPages(`${baseURI}user/repos?per_page=100`);
 };
 
-const getAllOrgs = function () {
+const getOrgs = function () {
   return ghFetch('user/orgs');
 };
 
@@ -65,6 +65,6 @@ const getAllOrgRepos = function (orgName) {
 export default {
   getUser,
   getUserRepos,
-  getAllOrgs,
+  getOrgs,
   getAllOrgRepos,
 };
