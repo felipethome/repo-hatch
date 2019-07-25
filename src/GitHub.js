@@ -3,6 +3,10 @@ import API from './GitHubAPI';
 import Adapter from './GitHubAdapter';
 import Storage from './Storage';
 
+const getAllSavedRepos = async function () {
+  return (await Storage.get({repos: {}})).repos;
+};
+
 const getDefaults = async function () {
   const defaults = (await Storage.get({defaults: {
     defaultRepoSource: '',
@@ -10,26 +14,13 @@ const getDefaults = async function () {
   return defaults;
 };
 
-const getUser = async function () {
-  return (await Storage.get({user: {}})).user;
-};
-
-const getAllOrgs = async function () {
-  return (await Storage.get({orgs: {}})).orgs;
-};
-
-const getAllSavedRepos = async function () {
-  return (await Storage.get({repos: {}})).repos;
-};
-
-const getAllOrgRepos = async function (orgName) {
-  const savedRepos = await getAllSavedRepos();
-  return savedRepos[orgName];
-};
-
 const updateDefaults = async function(defaults) {
   const savedDefaults = await getDefaults();
   return Storage.set({defaults: Object.assign(savedDefaults, defaults)});
+};
+
+const getUser = async function () {
+  return (await Storage.get({user: {}})).user;
 };
 
 const updateUser = async function () {
@@ -50,12 +41,21 @@ const updateUserRepos = async function (username) {
   return repos;
 };
 
+const getOrgs = async function () {
+  return (await Storage.get({orgs: {}})).orgs;
+};
+
 const updateOrgs = async function () {
-  const response = await API.getAllOrgs();
+  const response = await API.getOrgs();
   const orgs = response.body.map(Adapter.adaptOrg);
   await Storage.set({orgs});
 
   return orgs;
+};
+
+const getAllOrgRepos = async function (orgName) {
+  const savedRepos = await getAllSavedRepos();
+  return savedRepos[orgName];
 };
 
 const updateAllOrgRepos = async function (orgName) {
@@ -73,15 +73,15 @@ const getEverything = function () {
 };
 
 export default {
-  getDefaults,
-  getUser,
-  getAllOrgs,
-  getAllOrgRepos,
   getAllSavedRepos,
+  getDefaults,
   updateDefaults,
+  getUser,
   updateUser,
   updateUserRepos,
+  getOrgs,
   updateOrgs,
+  getAllOrgRepos,
   updateAllOrgRepos,
   getEverything,
 };
