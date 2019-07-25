@@ -15,12 +15,10 @@ const Bg = (function () {
     let textStr = text;
     if (typeof textStr !== 'string') textStr = textStr.toString();
 
-    if (_currOpt[OPT_BADGE]) {
-      if (color) {
-        chrome.browserAction.setBadgeBackgroundColor(color);
-      }
-      chrome.browserAction.setBadgeText({text: textStr});
+    if (color) {
+      chrome.browserAction.setBadgeBackgroundColor(color);
     }
+    chrome.browserAction.setBadgeText({text: textStr});
   };
 
   const findRepo = async function (text, suggest) {
@@ -32,7 +30,7 @@ const Bg = (function () {
 
   const buildActionStr = async function (actionName, optionalFilter) {
     if (!actionName) {
-      const defaultAction = await Storage.get({defaultAction: ''});
+      const defaultAction = (await Storage.get({defaultAction: ''})).defaultAction;
       return defaultAction && `/${defaultAction}`;
     }
 
@@ -45,9 +43,18 @@ const Bg = (function () {
     return `/${action}?utf8=%E2%9C%93&q=${filter.replace(' ', '+')}`;
   };
 
+  const getDefaultRepoSource = async function () {
+    return (await Storage.get({user: {login: ''}})).user.login;
+  };
+
+  const buildRepoFullName = async function (repo) {
+    return repo.includes('/') ? repo : `${(await getDefaultRepoSource())}/${repo}`;
+  };
+
   const handleEnteredText = async function (text) {
     const parts = text.split(' ');
-    const [repoSource, repoName] = parts[0].split('/');
+    const repoFullName = await buildRepoFullName(parts[0]);
+    const [repoSource, repoName] = repoFullName.split('/');
     const actionStr = await buildActionStr(parts[1], parts[2]);
 
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
