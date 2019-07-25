@@ -66,7 +66,7 @@ export default class OptionsPage extends React.Component {
 
     return (
       <div className={classes.container}>
-        <Navbar title="GitHub Extension" />
+        <Navbar title="G-Hub Navigation" />
         <div className={classes.optionsContainer}>
           <div className={classes.optionsSection}>
             <h2>Organizations</h2>
