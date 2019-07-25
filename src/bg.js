@@ -22,12 +22,22 @@ const Bg = (function () {
     suggest(result);
   };
 
+  const handleEnteredText = function (text) {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      var activeTab = tabs[0];
+      chrome.tabs.update(activeTab.id, {url: `https://github.com/nubank/${text}`});
+    });
+  };
+
   return {
     updateBadge,
     findRepo,
+    handleEnteredText,
   };
 })();
 
 window.Bg = Bg;
 
+chrome.omnibox.setDefaultSuggestion({description: 'Type the name of a repository'})
 chrome.omnibox.onInputChanged.addListener(Bg.findRepo);
+chrome.omnibox.onInputEntered.addListener(Bg.handleEnteredText);
