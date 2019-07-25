@@ -13,8 +13,8 @@ export default class OptionsPage extends React.Component {
   };
 
   componentDidMount() {
-    GitHub.getAllOrgs().then((orgsResponse) => {
-      this.setState(() => ({orgs: orgsResponse.body}));
+    GitHub.getAllOrgs().then((orgs) => {
+      this.setState(() => ({orgs}));
     });
   }
 
@@ -35,7 +35,6 @@ export default class OptionsPage extends React.Component {
 
     GitHub.getAllOrgRepos(e.currentTarget.id)
       .then((repos) => {
-        console.log("!!! repos", repos);
         this.setState((previousState) => ({
           reposBySource: Object.assign(previousState.reposBySource, {orgName: repos}),
         }));
@@ -57,7 +56,7 @@ export default class OptionsPage extends React.Component {
             <div className={classes.card}>
               {orgs.map((org) => (
                 <div className={classes.orgContainer} key={org.login}>
-                  <img className={classes.orgImage} src={org.avatar_url} />
+                  <img className={classes.orgImage} src={org.avatarUrl} />
                   <div className={classes.orgTitle}>{org.login}</div>
                   <RaisedButton id={org.login} loading={this.getLoadingState(org.login)} onClick={this.handleDownloadButtonClick}>
                     Download Repos

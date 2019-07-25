@@ -7,3 +7,8 @@ const adaptOrg = function (org) {
 const adaptRepo = function (repo) {
   return pick(['id', 'name', 'fullName', 'private', 'fork'], repo);
 };
+
+export default {
+  adaptOrg,
+  adaptRepo,
+};

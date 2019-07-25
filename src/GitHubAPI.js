@@ -49,8 +49,8 @@ const getAllOrgs = function () {
   return ghFetch('user/orgs');
 };
 
-const getAllOrgRepos = async function (orgName) {
-  const repos = await getAllPages(`${baseURI}orgs/${orgName}/repos?per_page=100`);
+const getAllOrgRepos = function (orgName) {
+  return getAllPages(`${baseURI}orgs/${orgName}/repos?per_page=100`);
 };
 
 export default {
