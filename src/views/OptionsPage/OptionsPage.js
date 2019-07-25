@@ -15,6 +15,7 @@ export default class OptionsPage extends React.Component {
     orgs: [],
     user: {},
     reposBySource: {},
+    token: '',
   };
 
   componentDidMount() {
@@ -31,16 +32,12 @@ export default class OptionsPage extends React.Component {
       })
       .then((defaults) => {
         newState.defaults = defaults;
+        return GitHub.getToken();
       })
-      .then(() => {
+      .then((token) => {
+        newState.token = `${token.slice(0, 5)}...`;
         this.setState(() => newState);
       });
-
-    // GitHub.updateUser().then((user) => {
-    //   GitHub.updateOrgs().then((orgs) => {
-    //     this.setState(() => ({user, orgs}));
-    //   });
-    // });
   }
 
   getLoadingState = (loaderName) => {
@@ -71,14 +68,22 @@ export default class OptionsPage extends React.Component {
       });
   };
 
-  handleTextChange = (e) => {
-    const defaultRepoSource = e.currentTarget.value;
+  handleTokenTextChange = (e) => {
+    const id = e.currentTarget.id;
+    const value = e.currentTarget.value;
+    this.setState(() => ({[id]: value}));
+  };
+
+  handleDefaultsTextChange = (e) => {
+    const id = e.currentTarget.id;
+    const value = e.currentTarget.value;
     this.setState((previousState) => ({
-      defaults: Object.assign(previousState.defaults, {defaultRepoSource}),
+      defaults: Object.assign(previousState.defaults, {[id]: value}),
     }));
   };
 
   handleGeneralSaveButton = () => {
+    GitHub.updateToken(this.state.token);
     GitHub.updateDefaults({defaultRepoSource: this.state.defaults.defaultRepoSource});
   };
 
@@ -95,7 +100,7 @@ export default class OptionsPage extends React.Component {
   };
 
   render() {
-    const {user, orgs, defaults} = this.state;
+    const {user, orgs, defaults, token} = this.state;
 
     return (
       <div className={classes.container}>
@@ -105,13 +110,26 @@ export default class OptionsPage extends React.Component {
           <div className={classes.optionsSection}>
             <h2>General</h2>
             <div className={classes.card}>
-              <TextField
-                label="Default repository namespace"
-                helperText="Defaults to your username."
-                floatingLabel
-                value={defaults.defaultRepoSource}
-                onChange={this.handleTextChange}
-              />
+              <div className={classes.field}>
+                <TextField
+                  id="token"
+                  label="GitHub token"
+                  helperText="You need a token with read access only."
+                  floatingLabel
+                  value={token}
+                  onChange={this.handleTokenTextChange}
+                />
+              </div>
+              <div className={classes.field}>
+                <TextField
+                  id="defaultRepoSource"
+                  label="Default repository namespace"
+                  helperText="Defaults to your username."
+                  floatingLabel
+                  value={defaults.defaultRepoSource}
+                  onChange={this.handleDefaultsTextChange}
+                />
+              </div>
               <div className={classes.saveButtonContainer}>
                 <RaisedButton onClick={this.handleGeneralSaveButton}>
                   Save

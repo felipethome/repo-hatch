@@ -1,5 +1,6 @@
-import Config from './Config';
 import camelcaseKeys from 'camelcase-keys';
+import Config from './Config';
+import Storage from './Storage';
 
 const baseURI = 'https://api.github.com/';
 
@@ -15,12 +16,12 @@ const getNextPage = function (linksHeader = '') {
   }, undefined);
 }
 
-const ghFetch = function (path, options = {}, fullPath = false) {
+const ghFetch = async function (path, options = {}, fullPath = false) {
   const token = Config.token;
   const opt = Object.assign({}, options);
   opt.headers = Object.assign({
     'Content-Type': 'application/json',
-    'Authorization': `token ${token}`,
+    'Authorization': `token ${(await Storage.get({token: 'Not defined.'})).token}`,
   }, options.headers);
 
   const response = {};

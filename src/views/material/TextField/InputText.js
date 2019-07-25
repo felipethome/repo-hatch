@@ -108,7 +108,6 @@ export default class InputText extends React.Component {
         <input
           {...userProps}
           autoFocus={autoFocus}
-          id={this._id}
           defaultValue={defaultValue}
           disabled={disabled}
           maxLength={maxLength}

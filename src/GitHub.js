@@ -68,8 +68,17 @@ const updateAllOrgRepos = async function (orgName) {
   return repos;
 };
 
+const getToken = async function () {
+  return (await Storage.get({token: ''})).token;
+};
+
+const updateToken = async function (newToken) {
+  await Storage.set({token: newToken});
+  return newToken;
+};
+
 const getEverything = function () {
-  return Storage.get(['orgs', 'repos', 'user', 'defaults']);
+  return Storage.get(['orgs', 'repos', 'user', 'defaults', 'token']);
 };
 
 export default {
@@ -83,5 +92,7 @@ export default {
   updateOrgs,
   getAllOrgRepos,
   updateAllOrgRepos,
+  getToken,
+  updateToken,
   getEverything,
 };

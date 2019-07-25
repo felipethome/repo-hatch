@@ -13,6 +13,10 @@
   color: var(--secondary-text-color);
 }
 
+.field {
+  padding: 24px;
+}
+
 .card {
   box-sizing: border-box;
   width: 100%;
