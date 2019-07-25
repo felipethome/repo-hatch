@@ -8,7 +8,7 @@
 }
 
 .optionsSection>h2 {
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   width: 100%;
   color: var(--secondary-text-color);
 }
@@ -16,9 +16,15 @@
 .card {
   box-sizing: border-box;
   width: 100%;
-  padding: 16px;
+  padding: 32px 24px;
   background: var(--background-color);
   box-shadow: var(--shadow-2dp);
+}
+
+.saveButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 12px;
 }
 
 .repoSourceEntryContainer {

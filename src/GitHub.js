@@ -3,24 +3,33 @@ import API from './GitHubAPI';
 import Adapter from './GitHubAdapter';
 import Storage from './Storage';
 
+const getDefaults = async function () {
+  const defaults = (await Storage.get({defaults: {
+    defaultRepoSource: '',
+  }})).defaults;
+  return defaults;
+};
+
 const getUser = async function () {
-  const user = (await Storage.get({user: {}})).user;
-  return user || {};
+  return (await Storage.get({user: {}})).user;
 };
 
 const getAllOrgs = async function () {
-  const orgs = (await Storage.get({orgs: {}})).orgs
-  return orgs || {};
+  return (await Storage.get({orgs: {}})).orgs;
 };
 
 const getAllSavedRepos = async function () {
-  const repos = (await Storage.get({repos: {}})).repos;
-  return repos || {};
+  return (await Storage.get({repos: {}})).repos;
 };
 
 const getAllOrgRepos = async function (orgName) {
   const savedRepos = await getAllSavedRepos();
   return savedRepos[orgName];
+};
+
+const updateDefaults = async function(defaults) {
+  const savedDefaults = await getDefaults();
+  return Storage.set({defaults: Object.assign(savedDefaults, defaults)});
 };
 
 const updateUser = async function () {
@@ -60,14 +69,16 @@ const updateAllOrgRepos = async function (orgName) {
 };
 
 const getEverything = function () {
-  return Storage.get(['orgs', 'repos']);
+  return Storage.get(['orgs', 'repos', 'user', 'defaults']);
 };
 
 export default {
+  getDefaults,
   getUser,
   getAllOrgs,
   getAllOrgRepos,
   getAllSavedRepos,
+  updateDefaults,
   updateUser,
   updateUserRepos,
   updateOrgs,

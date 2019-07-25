@@ -30,7 +30,6 @@ export default class InputText extends React.Component {
 
   constructor(props) {
     super(props);
-    this._id = this.props.name + Date.now();
   }
 
   render() {
@@ -78,7 +77,6 @@ export default class InputText extends React.Component {
 
       labelElem = (
         <label
-          htmlFor={this._id}
           className={cn(
             classes.label,
             focused && classes.labelFocus,

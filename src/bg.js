@@ -44,7 +44,9 @@ const Bg = (function () {
   };
 
   const getDefaultRepoSource = async function () {
-    return (await Storage.get({user: {login: ''}})).user.login;
+    const savedOptions = await Storage.get({defaults: {}, user: {}});
+    console.log(savedOptions);
+    return savedOptions.defaults.defaultRepoSource || savedOptions.user.login;
   };
 
   const buildRepoFullName = async function (repo) {

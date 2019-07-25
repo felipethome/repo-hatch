@@ -1,24 +1,46 @@
 import React from 'react';
 import RaisedButton from '../material/RaisedButton';
 import Navbar from '../material/Navbar';
+import TextField from '../material/TextField';
 import GitHub from '../../GitHub';
 
 import classes from './OptionsPage.css';
 
 export default class OptionsPage extends React.Component {
   state = {
-    user: {},
-    orgs: [],
+    defaults: {
+      defaultRepoSource: '',
+    },
     loading: {},
+    orgs: [],
+    user: {},
     reposBySource: {},
   };
 
   componentDidMount() {
-    GitHub.updateUser().then((user) => {
-      GitHub.updateOrgs().then((orgs) => {
-        this.setState(() => ({user, orgs}));
+    const newState = {};
+
+    GitHub.updateUser()
+      .then((user) => {
+        newState.user = user;
+        return GitHub.updateOrgs;
+      })
+      .then((orgs) => {
+        newState.orgs = orgs;
+        return GitHub.getDefaults();
+      })
+      .then((defaults) => {
+        newState.defaults = defaults;
+      })
+      .then(() => {
+        this.setState(() => newState);
       });
-    });
+
+    // GitHub.updateUser().then((user) => {
+    //   GitHub.updateOrgs().then((orgs) => {
+    //     this.setState(() => ({user, orgs}));
+    //   });
+    // });
   }
 
   getLoadingState = (loaderName) => {
@@ -49,6 +71,17 @@ export default class OptionsPage extends React.Component {
       });
   };
 
+  handleTextChange = (e) => {
+    const defaultRepoSource = e.currentTarget.value;
+    this.setState((previousState) => ({
+      defaults: Object.assign(previousState.defaults, {defaultRepoSource}),
+    }));
+  };
+
+  handleGeneralSaveButton = () => {
+    GitHub.updateDefaults({defaultRepoSource: this.state.defaults.defaultRepoSource});
+  };
+
   buildRepoSourceEntry = (source) => {
     return (
       <div className={classes.repoSourceEntryContainer} key={source.login}>
@@ -62,16 +95,33 @@ export default class OptionsPage extends React.Component {
   };
 
   render() {
-    const {user, orgs} = this.state;
+    const {user, orgs, defaults} = this.state;
 
     return (
       <div className={classes.container}>
         <Navbar title="G-Hub Navigation" />
+        <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
         <div className={classes.optionsContainer}>
+          <div className={classes.optionsSection}>
+            <h2>General</h2>
+            <div className={classes.card}>
+              <TextField
+                label="Default repository namespace"
+                helperText="Defaults to your username."
+                floatingLabel
+                value={defaults.defaultRepoSource}
+                onChange={this.handleTextChange}
+              />
+              <div className={classes.saveButtonContainer}>
+                <RaisedButton onClick={this.handleGeneralSaveButton}>
+                  Save
+                </RaisedButton>
+              </div>
+            </div>
+          </div>
           <div className={classes.optionsSection}>
             <h2>Organizations</h2>
             <div className={classes.card}>
-              <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
               {this.buildRepoSourceEntry(user)}
             </div>
           </div>
