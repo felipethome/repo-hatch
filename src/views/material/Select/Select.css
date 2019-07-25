@@ -1,0 +1,97 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.container:after {
+  position: absolute;
+  top: 10px;
+  right: 0.5em;
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: '';
+  border-left: .4em solid transparent;
+  border-right: .4em solid transparent;
+  border-top: .4em solid var(--border-color);
+  pointer-events: none;
+}
+
+.selectField {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px 5px 0;
+  background-color: transparent;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: var(--dark-text-color);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0px;
+}
+
+.selectField:focus {
+  outline: none;
+}
+
+.bar {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: block;
+  margin: 0 auto;
+  height: 2px;
+  width: 0%;
+  background: var(--primary-color);
+  text-align: center;
+  transition: 0.2s ease-out all;
+}
+
+.selectField:focus ~ .bar {
+  width: 100%;
+}
+
+.label {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin: 0px;
+  padding: 0 10px 6px 0;
+  color: var(--border-color);
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+}
+
+/* floatingLabel will be activated with JS when an option is selected. */
+.selectField:focus ~ .label, .floatingLabel {
+  transform: translate(0, -125%);
+  font-size: .9em;
+  color: var(--primary-color);
+}
+
+.selectField:disabled ~ .label {
+  color: var(--disabled-text-color);
+}
+
+.required {
+  margin-left: 2px;
+}
+
+.requiredWithValue {
+  color: var(--error-color);
+}
+
+.selectField:focus ~ .label .required {
+  color: var(--error-color);
+}
+
+.selectField:disabled ~ .required {
+  color: var(--disabled-text-color);
+}

@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.helperText {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: var(--border-color);
+  font-family: "Roboto", sans-serif;
+  padding-top: 5px;
+}
+
+.helperTextInvalid {
+  color: var(--error-color);
+}
+
+.helperTextDisabled {
+  color: var(--disabled-text-color);
+}

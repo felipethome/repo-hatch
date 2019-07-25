@@ -1,0 +1,40 @@
+.svg {
+  width: 66px;
+  height: 66px;
+  animation: spin 2s linear infinite;
+}
+
+.path {
+  transform-origin: center;
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 6px;
+  stroke-linecap: square;
+  stroke-dasharray: 188;
+  stroke-dashoffset: 188;
+  animation: dash 1.4s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 186;
+    transform: rotate(0deg);
+  }
+  50% {
+    stroke-dashoffset: 47;
+    transform: rotate(90deg);
+  }
+  100% {
+    stroke-dashoffset: 186;
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,104 @@
+/*
+ * The bar and label of the Material Design Text Field need to be "active"
+ * when the input text has focus or it is not empty. The focus state is easy
+ * to implement with CSS using the :focus selector, but to check if the input
+ * has any content we would need to use the :valid selector and mark the input
+ * as required. I don't want to mark the input as required unless it is.
+ *
+ * I solve this problem using JavaScript and that is why the classes here are
+ * not using selectors.
+ */
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.input {
+  display: block;
+  box-sizing: border-box;
+  padding: 0 10px 5px 0;
+  width: 100%;
+  color: var(--dark-text-color);
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  text-align: left;
+  text-overflow: clip;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  outline: none;
+}
+
+.inputInvalid {
+  border-bottom: 1px solid var(--error-color);
+}
+
+.inputDisabled {
+  color: var(--disabled-text-color);
+  border-bottom: 1px dotted var(--disabled-border-color);
+}
+
+.bar {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: block;
+  margin: 0 auto;
+  height: 2px;
+  width: 0%;
+  background: var(--primary-color);
+  text-align: center;
+  transition: 0.2s ease-out all;
+}
+
+.barFocus {
+  width: 100%;
+}
+
+.barInvalid {
+  background: var(--error-color);
+}
+
+.label {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin: 0px;
+  padding: 0 10px 6px 0;
+  color: var(--border-color);
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+}
+
+.labelFocus {
+  transform: translate(0, -125%);
+  font-size: .9em;
+  color: var(--primary-color);
+}
+
+.labelInvalid {
+  color: var(--error-color);
+}
+
+.labelDisabled {
+  color: var(--disabled-text-color);
+}
+
+.required {
+  margin-left: 2px;
+}
+
+.requiredFocus {
+  color: var(--error-color);
+}
+
+.requiredDisabled {
+  color: var(--disabled-text-color);
+}

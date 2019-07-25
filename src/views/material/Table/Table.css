@@ -1,0 +1,95 @@
+.table {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.headerRow {
+  height: 56px;
+  line-height: 100%;
+  text-align: left;
+  border-bottom: 1px solid var(--bright-border-color);
+}
+
+.headerRow th {
+  white-space: nowrap;
+}
+
+.headerRow th:first-child {
+  padding-left: 24px;
+}
+
+.headerRow th:last-child {
+  padding-right: 24px;
+}
+
+.headerSortIcon {
+  width: 16px;
+  height: 16px;
+  fill: var(--table-header-color);
+  vertical-align: middle;
+}
+
+.headerText {
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--table-header-color);
+}
+
+.body {
+  overflow: auto;
+}
+
+.row {
+  height: 48px;
+  line-height: 100%;
+  text-align: left;
+  font-size: 13px;
+  color: var(--dark-text-color);
+  border-bottom: 1px solid var(--bright-border-color);
+}
+
+.rowSelected {
+  background: var(--table-row-selected-color);
+}
+
+@media (hover) {
+  .row:hover {
+    background: var(--table-row-hover-color);
+    height: 48px;
+  }
+}
+
+.cell {
+  padding: 0;
+  white-space: nowrap;
+}
+
+.cell:first-child {
+  padding-left: 24px;
+}
+
+.cell:last-child {
+  padding-right: 24px;
+  width: 100%;
+}
+
+/* Applied on all cells, except the selection and last column cells. */
+.cellPadding {
+  padding-right: 56px;
+}
+
+.selectionCell {
+  padding: 0 24px;
+  line-height: 0;
+}
+
+.number {
+  text-align: right;
+}
+
+.clickable {
+  cursor: pointer;
+}

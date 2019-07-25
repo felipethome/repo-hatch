@@ -1,0 +1,31 @@
+:global :root {
+  --navbar-color: #212121;
+  
+  --background-color: #FFF;
+  --secondary-background-color: #F5F5F5;
+  --hover-background-color: #424242;
+  --hover-gray-background-color: rgba(153, 153, 153, .2);
+
+  --primary-color: #212121;
+  --accent-color: #4CAF50;
+  --secondary-color: #F6f6f6;
+  --disabled-color: rgba(0, 0, 0, .12);
+  --error-color: #F44336;
+
+  --bright-text-color: #FFF;
+  --dark-text-color: #212121;
+  --medium-text-color: #616161;
+  --secondary-text-color: rgba(0, 0, 0, .54);
+  --disabled-text-color: rgba(0, 0, 0, .26);
+
+  --border-color: rgba(0, 0, 0, .54);
+  --bright-border-color: #E0E0E0;
+  --disabled-border-color: rgba(0, 0, 0, .54);
+
+  --table-header-color: rgba(0, 0, 0, .54);
+  --table-header-selected-items-color: #A5D7A7;
+  --table-row-selected-color: #F5F5F5;
+  --table-row-hover-color: #EEE;
+
+  --snackbar-background-color: #323232;
+}

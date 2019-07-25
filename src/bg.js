@@ -111,6 +111,10 @@ const Bg = (function () {
     return GitHub.getAllOrgs();
   };
 
+  const getAllOrgRepos = function (orgName) {
+    return GitHub.getAllOrgRepos(orgName);
+  };
+
   return {
     init,
     getDefaultOptions,
@@ -119,6 +123,7 @@ const Bg = (function () {
     saveOptions,
     update,
     getAllOrgs,
+    getAllOrgRepos,
   };
 })();
 

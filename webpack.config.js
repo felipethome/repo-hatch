@@ -12,10 +12,10 @@ module.exports = {
       './src/Bg.js',
     ],
     'options-page': [
-      './src/OptionsPage/index.js',
+      './src/views/OptionsPage/index.js',
     ],
     'popup-page': [
-      './src/PopupPage/index.js',
+      './src/views/PopupPage/index.js',
     ],
   },
   output: {

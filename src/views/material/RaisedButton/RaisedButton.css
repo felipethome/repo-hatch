@@ -1,0 +1,62 @@
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px 16px;
+  height: 36px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  user-select: none;
+  border: none;
+  border-radius: 2px;
+  background: var(--primary-color);
+  color: var(--bright-text-color);
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-2dp);
+  transition: all 200ms ease-out;
+}
+
+.button:active {
+  box-shadow: var(--shadow-6dp);
+}
+
+@media (hover) {
+  .button:hover {
+    background: var(--hover-background-color);
+  }
+}
+
+.button:disabled {
+  background: var(--disabled-color);
+  color: var(--disabled-text-color);
+  cursor: not-allowed;
+  box-shadow: var(--shadow-0dp);
+}
+
+.childrenContainer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loader {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+}
+
+.loader>circle {
+  stroke: var(--accent-color);
+}
