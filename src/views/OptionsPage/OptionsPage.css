@@ -21,23 +21,25 @@
   box-shadow: var(--shadow-2dp);
 }
 
-.orgContainer {
+.repoSourceEntryContainer {
   display: flex;
   align-items: center;
   width: 100%;
+  border-bottom: 1px solid var(--bright-border-color);
+  padding: 10px 0;
 }
 
-.orgContainer>button {
+.repoSourceEntryContainer>button {
   margin-left: auto;
 }
 
-.orgTitle {
+.repoSourceEntryTitle {
   margin-left: 10px;
   text-transform: capitalize;
   font-size: 18px;
 }
 
-.orgImage {
+.repoSourceEntryImage {
   width: 50px;
   height: auto;
 }

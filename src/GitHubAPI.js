@@ -45,6 +45,14 @@ const getAllPages = async function (link, result = []) {
   return getAllPages(nextLink, result);
 };
 
+const getUser = function () {
+  return ghFetch('user');
+};
+
+const getUserRepos = function () {
+  return getAllPages(`${baseURI}user/repos?per_page=100`);
+};
+
 const getAllOrgs = function () {
   return ghFetch('user/orgs');
 };
@@ -54,6 +62,8 @@ const getAllOrgRepos = function (orgName) {
 };
 
 export default {
+  getUser,
+  getUserRepos,
   getAllOrgs,
   getAllOrgRepos,
 };

@@ -1,4 +1,6 @@
-import Storage from './Storage';
+import Fuse from 'fuse.js';
+import {flatten} from 'ramda';
+import GitHub from './GitHub';
 
 const Bg = (function () {
   const updateBadge = function (text, color = {color: '#4CAF50'}) {
@@ -13,9 +15,19 @@ const Bg = (function () {
     }
   };
 
+  const findRepo = async function (text, suggest) {
+    const repos = flatten(Object.values(await GitHub.getAllSavedRepos()));
+    const fuse = new Fuse(repos, {keys: [{name: 'fullName', weight: 1}]});
+    const result = fuse.search(text).map((repo) => ({content: repo.name, description: repo.fullName}));
+    suggest(result);
+  };
+
   return {
     updateBadge,
+    findRepo,
   };
 })();
 
 window.Bg = Bg;
+
+chrome.omnibox.onInputChanged.addListener(Bg.findRepo);

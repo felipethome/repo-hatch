@@ -7,14 +7,17 @@ import classes from './OptionsPage.css';
 
 export default class OptionsPage extends React.Component {
   state = {
+    user: {},
     orgs: [],
     loading: {},
     reposBySource: {},
   };
 
   componentDidMount() {
-    GitHub.updateOrgs().then((orgs) => {
-      this.setState(() => ({orgs}));
+    GitHub.updateUser().then((user) => {
+      GitHub.updateOrgs().then((orgs) => {
+        this.setState(() => ({user, orgs}));
+      });
     });
   }
 
@@ -29,41 +32,48 @@ export default class OptionsPage extends React.Component {
   };
 
   handleDownloadButtonClick = (e) => {
-    const orgName = e.currentTarget.id;
+    const name = e.currentTarget.id;
+    const {user} = this.state;
+    const f = name === user.login ? GitHub.updateUserRepos : GitHub.updateAllOrgRepos;
 
-    this.setLoadingState(orgName, true);
+    this.setLoadingState(name, true);
 
-    GitHub.updateAllOrgRepos(e.currentTarget.id)
+   f(e.currentTarget.id)
       .then((repos) => {
         this.setState((previousState) => ({
-          reposBySource: Object.assign(previousState.reposBySource, {orgName: repos}),
+          reposBySource: Object.assign(previousState.reposBySource, {[name]: repos}),
         }));
       })
       .finally(() => {
-        this.setLoadingState(orgName, false);
+        this.setLoadingState(name, false);
       });
   };
 
+  buildRepoSourceEntry = (source) => {
+    return (
+      <div className={classes.repoSourceEntryContainer} key={source.login}>
+        <img className={classes.repoSourceEntryImage} src={source.avatarUrl} />
+        <div className={classes.repoSourceEntryTitle}>{source.login}</div>
+        <RaisedButton id={source.login} loading={this.getLoadingState(source.login)} onClick={this.handleDownloadButtonClick}>
+          Download Repos
+        </RaisedButton>
+      </div>
+    );
+  };
+
   render() {
-    const {orgs} = this.state;
+    const {user, orgs} = this.state;
 
     return (
       <div className={classes.container}>
-        <Navbar title="Dev Extension" />
+        <Navbar title="GitHub Extension" />
         <div className={classes.optionsContainer}>
           <div className={classes.optionsSection}>
             <h2>Organizations</h2>
             <div className={classes.card}>
               <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
-              {orgs.map((org) => (
-                <div className={classes.orgContainer} key={org.login}>
-                  <img className={classes.orgImage} src={org.avatarUrl} />
-                  <div className={classes.orgTitle}>{org.login}</div>
-                  <RaisedButton id={org.login} loading={this.getLoadingState(org.login)} onClick={this.handleDownloadButtonClick}>
-                    Download Repos
-                  </RaisedButton>
-                </div>
-              ))}
+              {this.buildRepoSourceEntry(user)}
+              {orgs.map((org) => this.buildRepoSourceEntry(org))}
             </div>
           </div>
         </div>
