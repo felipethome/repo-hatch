@@ -1,6 +1,7 @@
 import React from 'react';
 import RaisedButton from '../material/RaisedButton';
 import Navbar from '../material/Navbar';
+import GitHub from '../../GitHub';
 
 import classes from './OptionsPage.css';
 
@@ -12,8 +13,7 @@ export default class OptionsPage extends React.Component {
   };
 
   componentDidMount() {
-    const bg = this.props.bg;
-    bg.getAllOrgs().then((orgsResponse) => {
+    GitHub.getAllOrgs().then((orgsResponse) => {
       this.setState(() => ({orgs: orgsResponse.body}));
     });
   }
@@ -29,12 +29,11 @@ export default class OptionsPage extends React.Component {
   };
 
   handleDownloadButtonClick = (e) => {
-    const bg = this.props.bg;
     const orgName = e.currentTarget.id;
 
     this.setLoadingState(orgName, true);
 
-    bg.getAllOrgRepos(e.currentTarget.id)
+    GitHub.getAllOrgRepos(e.currentTarget.id)
       .then((repos) => {
         console.log("!!! repos", repos);
         this.setState((previousState) => ({
@@ -42,7 +41,6 @@ export default class OptionsPage extends React.Component {
         }));
       })
       .finally(() => {
-        console.log("!!! finally");
         this.setLoadingState(orgName, false);
       });
   };

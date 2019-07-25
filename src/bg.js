@@ -1,21 +1,6 @@
 import Storage from './Storage';
-import GitHub from './GitHub';
 
 const Bg = (function () {
-  let options;
-
-  const getDefaultOptions = function () {
-    return {
-      profile: {},
-      orgs: {},
-      repos: {},
-    };
-  };
-
-  const init = function (opt) {
-    options = opt;
-  };
-
   const updateBadge = function (text, color = {color: '#4CAF50'}) {
     let textStr = text;
     if (typeof textStr !== 'string') textStr = textStr.toString();
@@ -29,13 +14,8 @@ const Bg = (function () {
   };
 
   return {
-    init,
-    getDefaultOptions,
     updateBadge,
   };
 })();
 
 window.Bg = Bg;
-
-Storage.get(Bg.getDefaultOptions(), 'sync')
-  .then((options) => Bg.init(options));

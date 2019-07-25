@@ -1,4 +1,5 @@
 import Config from './Config';
+import camelcaseKeys from 'camelcase-keys';
 
 const baseURI = 'https://api.github.com/';
 
@@ -30,8 +31,8 @@ const ghFetch = function (path, options = {}, fullPath = false) {
       response.status = r.status;
       return r.json();
     })
-    .then((json) => {
-      response.body = json;
+    .then((r) => {
+      response.body = camelcaseKeys(r, {deep: true});
       return response;
     });
 };
