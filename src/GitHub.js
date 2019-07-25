@@ -3,16 +3,19 @@ import API from './GitHubAPI';
 import Adapter from './GitHubAdapter';
 import Storage from './Storage';
 
-const getUser = function () {
-  return Storage.get({user: null}).user || {};
+const getUser = async function () {
+  const user = (await Storage.get({user: {}})).user;
+  return user || {};
 };
 
-const getAllOrgs = function () {
-  return Storage.get({orgs: {}}).orgs || [];
+const getAllOrgs = async function () {
+  const orgs = (await Storage.get({orgs: {}})).orgs
+  return orgs || {};
 };
 
-const getAllSavedRepos = function () {
-  return Storage.get({repos: {}}).repos || {};
+const getAllSavedRepos = async function () {
+  const repos = (await Storage.get({repos: {}})).repos;
+  return repos || {};
 };
 
 const getAllOrgRepos = async function (orgName) {

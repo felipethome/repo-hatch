@@ -73,7 +73,6 @@ export default class OptionsPage extends React.Component {
             <div className={classes.card}>
               <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
               {this.buildRepoSourceEntry(user)}
-              {orgs.map((org) => this.buildRepoSourceEntry(org))}
             </div>
           </div>
         </div>
