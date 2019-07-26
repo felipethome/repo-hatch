@@ -46,7 +46,6 @@ const Bg = (function () {
 
   const getDefaultRepoSource = async function () {
     const savedOptions = await Storage.get({defaults: {}, user: {}});
-    console.log(savedOptions);
     return savedOptions.defaults.defaultRepoSource || savedOptions.user.login;
   };
 
