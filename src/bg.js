@@ -1,4 +1,4 @@
-import Fuse from 'fuse.js';
+import fuzzysort from 'fuzzysort';
 import {flatten} from 'ramda';
 import GitHub from './GitHub';
 import Storage from './Storage';
@@ -23,8 +23,9 @@ const Bg = (function () {
 
   const findRepo = async function (text, suggest) {
     const repos = flatten(Object.values(await GitHub.getAllSavedRepos()));
-    const fuse = new Fuse(repos, {keys: [{name: 'fullName', weight: 1}]});
-    const result = fuse.search(text).map((repo) => ({content: `${repo.fullName} `, description: repo.fullName}));
+    const result = fuzzysort.go(text, repos, {key: 'fullName'}).map((repo) => (
+      {content: `${repo.obj.fullName} `, description: repo.obj.fullName}
+    ));
     suggest(result);
   };
 
