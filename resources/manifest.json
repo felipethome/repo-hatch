@@ -31,9 +31,7 @@
   },
   "web_accessible_resources": [
     "img/*",
-    "scripts/*",
-    "styles/*",
-    "audio/*"
+    "scripts/*"
   ],
   "permissions": [
     "background",
