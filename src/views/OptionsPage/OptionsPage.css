@@ -17,6 +17,25 @@
   padding: 24px;
 }
 
+.dialog {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 0 24px;
+}
+
+.dialogCheckboxContainer {
+  display: flex;
+}
+
+.dialogCheckboxContainer>label {
+  padding: 8px 0;
+}
+
+.dialogCheckboxContainer>div {
+  margin-left: auto;
+}
+
 .card {
   box-sizing: border-box;
   width: 100%;

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '../IconButton';
 import CloseIcon from '../icons/navigation/close';
+import keycode from 'keycode';
 
 import classes from './Dialog.css';
 
@@ -14,6 +15,20 @@ export default class Dialog extends React.Component {
     onClose: PropTypes.func,
     show: PropTypes.bool,
     title: PropTypes.any,
+  };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  };
+
+  handleKeyDown = (e) => {
+    if (keycode(e) === 'esc') {
+      if (this.props.onClose) this.props.onClose(e);
+    }
   };
 
   render() {

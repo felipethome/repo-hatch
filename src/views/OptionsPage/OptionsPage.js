@@ -3,6 +3,7 @@ import RaisedButton from '../material/RaisedButton';
 import Navbar from '../material/Navbar';
 import TextField from '../material/TextField';
 import GitHub from '../../GitHub';
+import RepoDownload from './RepoDownload';
 
 import classes from './OptionsPage.css';
 
@@ -50,24 +51,6 @@ export default class OptionsPage extends React.Component {
     }));
   };
 
-  handleDownloadButtonClick = (e) => {
-    const name = e.currentTarget.id;
-    const {user} = this.state;
-    const f = name === user.login ? GitHub.updateUserRepos : GitHub.updateAllOrgRepos;
-
-    this.setLoadingState(name, true);
-
-   f(e.currentTarget.id)
-      .then((repos) => {
-        this.setState((previousState) => ({
-          reposBySource: Object.assign(previousState.reposBySource, {[name]: repos}),
-        }));
-      })
-      .finally(() => {
-        this.setLoadingState(name, false);
-      });
-  };
-
   handleTokenTextChange = (e) => {
     const id = e.currentTarget.id;
     const value = e.currentTarget.value;
@@ -85,18 +68,6 @@ export default class OptionsPage extends React.Component {
   handleGeneralSaveButton = () => {
     GitHub.updateToken(this.state.token);
     GitHub.updateDefaults({defaultRepoSource: this.state.defaults.defaultRepoSource});
-  };
-
-  buildRepoSourceEntry = (source) => {
-    return (
-      <div className={classes.repoSourceEntryContainer} key={source.login}>
-        <img className={classes.repoSourceEntryImage} src={source.avatarUrl} />
-        <div className={classes.repoSourceEntryTitle}>{source.login}</div>
-        <RaisedButton id={source.login} loading={this.getLoadingState(source.login)} onClick={this.handleDownloadButtonClick}>
-          Download Repos
-        </RaisedButton>
-      </div>
-    );
   };
 
   render() {
@@ -140,8 +111,25 @@ export default class OptionsPage extends React.Component {
           <div className={classes.optionsSection}>
             <h2>Organizations</h2>
             <div className={classes.card}>
-              {this.buildRepoSourceEntry(user)}
-              {orgs.map(this.buildRepoSourceEntry)}
+              <RepoDownload
+                source={user}
+                updateFunction={GitHub.updateUserRepos}
+                options={[
+                  {label: 'Owner', name: 'owner'},
+                  {label: 'Collaborator', name: 'collaborator'}
+                ]}
+              />
+              {orgs.map((org) => (
+                <RepoDownload
+                  key={org.login}
+                  source={org}
+                  updateFunction={GitHub.updateAllOrgRepos}
+                  options={[
+                    {label: 'Owner', name: 'owner'},
+                    {label: 'Collaborator', name: 'collaborator'}
+                  ]}
+                />
+              ))}
             </div>
           </div>
         </div>
