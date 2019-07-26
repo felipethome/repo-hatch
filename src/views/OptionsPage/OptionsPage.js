@@ -6,6 +6,7 @@ import GitHub from '../../GitHub';
 import RepoDownload from './RepoDownload';
 
 import classes from './OptionsPage.css';
+import CircularIndicatorIndeterminate from '../material/CircularIndicator/Indeterminate';
 
 export default class OptionsPage extends React.Component {
   state = {
@@ -22,6 +23,16 @@ export default class OptionsPage extends React.Component {
   componentDidMount() {
     const newState = {};
 
+    GitHub.getToken()
+      .then((token) => {
+        newState.token = `${token.slice(0, 5)}${token ? '...' : ''}`;
+        if (token) this.initialize(token);
+      });
+  }
+
+  initialize = (token) => {
+    const newState = {token};
+
     GitHub.updateUser()
       .then((user) => {
         newState.user = user;
@@ -33,13 +44,9 @@ export default class OptionsPage extends React.Component {
       })
       .then((defaults) => {
         newState.defaults = defaults;
-        return GitHub.getToken();
-      })
-      .then((token) => {
-        newState.token = `${token.slice(0, 5)}...`;
-        this.setState(() => newState);
+        return this.setState(() => newState);
       });
-  }
+  };
 
   getLoadingState = (loaderName) => {
     return this.state.loading[loaderName];
@@ -66,31 +73,28 @@ export default class OptionsPage extends React.Component {
   };
 
   handleGeneralSaveButton = () => {
-    GitHub.updateToken(this.state.token);
     GitHub.updateDefaults({defaultRepoSource: this.state.defaults.defaultRepoSource});
+  };
+
+  handleTokenSaveButton = () => {
+    if (this.state.token.length === 40) {
+      GitHub.updateToken(this.state.token)
+        .then(() => {
+          this.initialize(this.state.token);
+        });
+    }
   };
 
   render() {
     const {user, orgs, defaults, token} = this.state;
+    let optionSections;
 
-    return (
-      <div className={classes.container}>
-        <Navbar title="G-Hub Navigation" />
-        <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
-        <div className={classes.optionsContainer}>
+    if (Object.entries(user).length > 0) {
+      optionSections = (
+        <React.Fragment>
           <div className={classes.optionsSection}>
             <h2>General</h2>
             <div className={classes.card}>
-              <div className={classes.field}>
-                <TextField
-                  id="token"
-                  label="GitHub token"
-                  helperText="You need a token with read access only."
-                  floatingLabel
-                  value={token}
-                  onChange={this.handleTokenTextChange}
-                />
-              </div>
               <div className={classes.field}>
                 <TextField
                   id="defaultRepoSource"
@@ -108,30 +112,55 @@ export default class OptionsPage extends React.Component {
               </div>
             </div>
           </div>
+
           <div className={classes.optionsSection}>
             <h2>Organizations</h2>
             <div className={classes.card}>
               <RepoDownload
                 source={user}
                 updateFunction={GitHub.updateUserRepos}
-                options={[
-                  {label: 'Owner', name: 'owner'},
-                  {label: 'Collaborator', name: 'collaborator'}
-                ]}
               />
               {orgs.map((org) => (
                 <RepoDownload
                   key={org.login}
                   source={org}
                   updateFunction={GitHub.updateAllOrgRepos}
-                  options={[
-                    {label: 'Owner', name: 'owner'},
-                    {label: 'Collaborator', name: 'collaborator'}
-                  ]}
                 />
               ))}
             </div>
           </div>
+        </React.Fragment>
+      );
+    }
+
+    return (
+      <div className={classes.container}>
+        <Navbar title="G-Hub Navigation" />
+        <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
+
+        <div className={classes.optionsContainer}>
+          <div className={classes.optionsSection}>
+            <h2>Token</h2>
+            <div className={classes.card}>
+              <div className={classes.field}>
+                <TextField
+                  id="token"
+                  label="GitHub token"
+                  helperText="You need a token with read access only."
+                  floatingLabel
+                  value={token}
+                  onChange={this.handleTokenTextChange}
+                />
+              </div>
+              <div className={classes.saveButtonContainer}>
+                <RaisedButton onClick={this.handleTokenSaveButton}>
+                  Save
+                </RaisedButton>
+              </div>
+            </div>
+          </div>
+
+          {optionSections}
         </div>
       </div>
     );

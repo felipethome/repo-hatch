@@ -5,8 +5,8 @@ import Storage from './Storage';
 const baseURI = 'https://api.github.com/';
 
 // https://github.com/github-tools/github/blob/master/lib/Requestable.js
-const getNextPage = function (linksHeader = '') {
-  const links = linksHeader.split(/\s*,\s*/); // splits and strips the urls
+const getNextPage = function (linksHeader) {
+  const links = (linksHeader || '').split(/\s*,\s*/); // splits and strips the urls
   return links.reduce(function(nextUrl, link) {
       if (link.search(/rel="next"/) !== -1) {
         return (link.match(/<(.*)>/) || [])[1];
@@ -51,7 +51,7 @@ const getUser = function () {
 };
 
 const getUserRepos = function () {
-  return getAllPages(`${baseURI}user/repos?per_page=100`);
+  return getAllPages(`${baseURI}user/repos?per_page=100&affiliation=owner,collaborator`);
 };
 
 const getOrgs = function () {
