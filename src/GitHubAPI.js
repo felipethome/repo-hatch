@@ -19,7 +19,7 @@ const ghFetch = async function (path, options = {}, fullPath = false) {
   const opt = Object.assign({}, options);
   opt.headers = Object.assign({
     'Content-Type': 'application/json',
-    'Authorization': `token ${(await Config.getToken()).token}`,
+    'Authorization': `token ${(await Config.getToken())}`,
   }, options.headers);
 
   const response = {};
@@ -53,7 +53,7 @@ const getUserRepos = function () {
 };
 
 const getOrgs = function () {
-  return ghFetch('user/orgs');
+  return ghFetch('/user/orgs');
 };
 
 const getAllOrgRepos = function (orgName) {
@@ -62,6 +62,7 @@ const getAllOrgRepos = function (orgName) {
 
 export default {
   baseURI,
+  ghFetch,
   getUser,
   getUserRepos,
   getOrgs,
