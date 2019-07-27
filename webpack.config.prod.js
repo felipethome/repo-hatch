@@ -1,13 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const outputFolder = 'resources';
 
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
-  watch: true,
+  mode: 'production',
   entry: {
     bg: [
       './src/Bg.js',
@@ -58,8 +55,5 @@ module.exports = {
   plugins: [
     // Do not emit compiled assets that include errors.
     new webpack.NoEmitOnErrorsPlugin(),
-
-    // Clean all the content in the scripts folder.
-    new CleanWebpackPlugin([`./${outputFolder}/scripts/**/*`]),
   ],
 };
