@@ -1,8 +1,10 @@
-jest.mock('../src/Config', () => ({
+jest.mock('../../src/Config', () => ({
+  baseURI: 'https://api.github.com',
   getToken: () => Promise.resolve('abc')
 }));
 
-import API from '../src/GitHubAPI';
+import API from '../../src/github/GitHubAPI';
+import Config from '../../src/Config';
 import jestFetchMock from 'jest-fetch-mock';
 
 global.fetch = jestFetchMock;
@@ -10,33 +12,6 @@ global.fetch = jestFetchMock;
 describe('testing GitHub api', () => {
   beforeEach(() => {
     fetch.resetMocks()
-  });
-
-  test('github fetch', (done) => {
-    const body = {
-      attr: 'a',
-      other_attr: 'b',
-    };
-
-    const internalBody = {
-      attr: 'a',
-      otherAttr: 'b',
-    };
-
-    fetch.once(JSON.stringify(body));
-
-    API.ghFetch('/user').then((res) => {
-      expect(res.body).toEqual(internalBody);
-      expect(global.fetch).toHaveBeenCalledTimes(1);
-      expect(fetch.mock.calls[0][0]).toEqual(`${API.baseURI}/user`);
-      expect(fetch.mock.calls[0][1]).toEqual({
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'token abc',
-        }
-      });
-      done();
-    });
   });
 
   test('gets the GitHub user', (done) => {
@@ -68,7 +43,7 @@ describe('testing GitHub api', () => {
 
     API.getUser().then((res) => {
       expect(res.body).toEqual(internalUserResponse);
-      expect(fetch.mock.calls[0][0]).toEqual(`${API.baseURI}/user`);
+      expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user`);
       done();
     });
   });
@@ -92,7 +67,7 @@ describe('testing GitHub api', () => {
 
     API.getOrgs().then((res) => {
       expect(res.body).toEqual(internalOrgsResponse);
-      expect(fetch.mock.calls[0][0]).toEqual(`${API.baseURI}/user/orgs`);
+      expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user/orgs`);
       done();
     });
   });

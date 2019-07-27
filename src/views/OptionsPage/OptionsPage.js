@@ -2,7 +2,7 @@ import React from 'react';
 import RaisedButton from '../material/RaisedButton';
 import Navbar from '../material/Navbar';
 import TextField from '../material/TextField';
-import GitHub from '../../GitHub';
+import GitHub from '../../github/GitHub';
 import RepoDownload from './RepoDownload';
 
 import classes from './OptionsPage.css';

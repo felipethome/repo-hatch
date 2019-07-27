@@ -1,7 +1,7 @@
 import {flatten} from 'ramda';
 import API from './GitHubAPI';
 import Adapter from './GitHubAdapter';
-import Storage from './Storage';
+import Storage from '../common/Storage';
 
 const getAllSavedRepos = async function () {
   return (await Storage.get({repos: {}})).repos;

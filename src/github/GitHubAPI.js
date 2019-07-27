@@ -1,7 +1,5 @@
-import camelcaseKeys from 'camelcase-keys';
-import Config from './Config';
-
-const baseURI = 'https://api.github.com';
+import Config from '../Config';
+import ghFetch from './ghFetch';
 
 // https://github.com/github-tools/github/blob/master/lib/Requestable.js
 const getNextPage = function (linksHeader) {
@@ -14,27 +12,6 @@ const getNextPage = function (linksHeader) {
       return nextUrl;
   }, undefined);
 }
-
-const ghFetch = async function (path, options = {}, fullPath = false) {
-  const opt = Object.assign({}, options);
-  opt.headers = Object.assign({
-    'Content-Type': 'application/json',
-    'Authorization': `token ${(await Config.getToken())}`,
-  }, options.headers);
-
-  const response = {};
-
-  return fetch(`${fullPath ? '' : baseURI}${path}`, opt)
-    .then((r) => {
-      response.headers = r.headers;
-      response.status = r.status;
-      return r.json();
-    })
-    .then((r) => {
-      response.body = camelcaseKeys(r, {deep: true});
-      return response;
-    });
-};
 
 const getAllPages = async function (link, result = []) {
   if (!link) return result;
@@ -49,7 +26,7 @@ const getUser = function () {
 };
 
 const getUserRepos = function () {
-  return getAllPages(`${baseURI}/user/repos?per_page=100&affiliation=owner,collaborator`);
+  return getAllPages(`${Config.Config.baseURI}/user/repos?per_page=100&affiliation=owner,collaborator`);
 };
 
 const getOrgs = function () {
@@ -57,11 +34,10 @@ const getOrgs = function () {
 };
 
 const getAllOrgRepos = function (orgName) {
-  return getAllPages(`${baseURI}/orgs/${orgName}/repos?per_page=100`);
+  return getAllPages(`${Config.baseURI}/orgs/${orgName}/repos?per_page=100`);
 };
 
 export default {
-  baseURI,
   ghFetch,
   getUser,
   getUserRepos,

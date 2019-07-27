@@ -1,7 +1,7 @@
 import fuzzysort from 'fuzzysort';
 import {flatten} from 'ramda';
-import GitHub from './GitHub';
-import Storage from './Storage';
+import GitHub from './github/GitHub';
+import Storage from './common/Storage';
 
 const defaultActions = {
   p: {action: 'pulls'},
