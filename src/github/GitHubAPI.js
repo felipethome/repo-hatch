@@ -27,7 +27,6 @@ const getAllOrgRepos = function (orgName) {
 };
 
 export default {
-  getNextPage,
   getAllPages,
   getUser,
   getUserRepos,
