@@ -1,4 +1,4 @@
-// https://github.com/github-tools/github/blob/master/lib/Requestable.js
+// From https://github.com/github-tools/github/blob/master/lib/Requestable.js
 const getNextPage = function (linksHeader) {
   const links = (linksHeader || '').split(/\s*,\s*/); // splits and strips the urls
   return links.reduce((nextUrl, link) => {
