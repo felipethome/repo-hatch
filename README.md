@@ -15,3 +15,9 @@ npm run build
 ```
 npm run dev
 ```
+
+## Tests
+
+```
+npm run test
+```
