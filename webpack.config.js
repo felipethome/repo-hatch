@@ -1,12 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const outputFolder = 'resources';
 
 module.exports = {
   mode: 'development',
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   watch: true,
   entry: {
     bg: [
@@ -60,6 +60,6 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
 
     // Clean all the content in the scripts folder.
-    new CleanWebpackPlugin([`./${outputFolder}/scripts/**/*`]),
+    new CleanWebpackPlugin(),
   ],
 };
