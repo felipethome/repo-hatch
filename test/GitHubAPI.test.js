@@ -7,7 +7,7 @@ import jestFetchMock from 'jest-fetch-mock';
 
 global.fetch = jestFetchMock;
 
-describe('testing api', () => {
+describe('testing GitHub api', () => {
   beforeEach(() => {
     fetch.resetMocks()
   });
