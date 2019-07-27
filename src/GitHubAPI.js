@@ -1,8 +1,7 @@
 import camelcaseKeys from 'camelcase-keys';
 import Config from './Config';
-import Storage from './Storage';
 
-const baseURI = 'https://api.github.com/';
+const baseURI = 'https://api.github.com';
 
 // https://github.com/github-tools/github/blob/master/lib/Requestable.js
 const getNextPage = function (linksHeader) {
@@ -17,11 +16,10 @@ const getNextPage = function (linksHeader) {
 }
 
 const ghFetch = async function (path, options = {}, fullPath = false) {
-  const token = Config.token;
   const opt = Object.assign({}, options);
   opt.headers = Object.assign({
     'Content-Type': 'application/json',
-    'Authorization': `token ${(await Storage.get({token: 'Not defined.'})).token}`,
+    'Authorization': `token ${(await Config.getToken()).token}`,
   }, options.headers);
 
   const response = {};
@@ -47,11 +45,11 @@ const getAllPages = async function (link, result = []) {
 };
 
 const getUser = function () {
-  return ghFetch('user');
+  return ghFetch('/user');
 };
 
 const getUserRepos = function () {
-  return getAllPages(`${baseURI}user/repos?per_page=100&affiliation=owner,collaborator`);
+  return getAllPages(`${baseURI}/user/repos?per_page=100&affiliation=owner,collaborator`);
 };
 
 const getOrgs = function () {
@@ -59,10 +57,11 @@ const getOrgs = function () {
 };
 
 const getAllOrgRepos = function (orgName) {
-  return getAllPages(`${baseURI}orgs/${orgName}/repos?per_page=100`);
+  return getAllPages(`${baseURI}/orgs/${orgName}/repos?per_page=100`);
 };
 
 export default {
+  baseURI,
   getUser,
   getUserRepos,
   getOrgs,
