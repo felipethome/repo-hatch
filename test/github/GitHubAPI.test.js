@@ -14,59 +14,19 @@ describe('testing GitHub api', () => {
     fetch.resetMocks();
   });
 
-  test('gets the GitHub user', (done) => {
-    const userResponse = {
-      "login": "octocat",
-      "id": 1,
-      "node_id": "MDQ6VXNlcjE=",
-      "avatar_url": "https://github.com/images/error/octocat_happy.gif",
-      "type": "User",
-      "name": "monalisa octocat",
-      "company": "GitHub",
-      "location": "San Francisco",
-      "email": "octocat@github.com",
-    };
+  test('GitHub user', (done) => {
+    fetch.once(JSON.stringify({}));
 
-    const internalUserResponse = {
-      "login": "octocat",
-      "id": 1,
-      "nodeId": "MDQ6VXNlcjE=",
-      "avatarUrl": "https://github.com/images/error/octocat_happy.gif",
-      "type": "User",
-      "name": "monalisa octocat",
-      "company": "GitHub",
-      "location": "San Francisco",
-      "email": "octocat@github.com",
-    };
-
-    fetch.once(JSON.stringify(userResponse));
-
-    API.getUser().then((res) => {
-      expect(res.body).toEqual(internalUserResponse);
+    API.getUser().then(() => {
       expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user`);
       done();
     });
   });
 
-  test('gets the GitHub user organizations', (done) => {
-    const orgsResponse = [{
-      "login": "octocat",
-      "id": 1,
-      "node_id": "MDQ6VXNlcjE=",
-      "avatar_url": "https://github.com/images/error/octocat_happy.gif",
-    }];
-
-    const internalOrgsResponse = [{
-      "login": "octocat",
-      "id": 1,
-      "nodeId": "MDQ6VXNlcjE=",
-      "avatarUrl": "https://github.com/images/error/octocat_happy.gif",
-    }];
-
-    fetch.once(JSON.stringify(orgsResponse));
+  test('GitHub organizations', (done) => {
+    fetch.once(JSON.stringify({}));
 
     API.getOrgs().then((res) => {
-      expect(res.body).toEqual(internalOrgsResponse);
       expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user/orgs`);
       done();
     });
