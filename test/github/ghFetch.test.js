@@ -1,5 +1,5 @@
 jest.mock('../../src/Config', () => ({
-  baseURI: 'https://api.github.com',
+  gitHubBaseURI: 'https://api.github.com',
   getToken: () => Promise.resolve('abc'),
 }));
 
@@ -30,7 +30,7 @@ describe('testing fetch', () => {
     ghFetch('/user').then((res) => {
       expect(res.body).toEqual(internalBody);
       expect(global.fetch).toHaveBeenCalledTimes(1);
-      expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user`);
+      expect(fetch.mock.calls[0][0]).toEqual(`${Config.gitHubBaseURI}/user`);
       expect(fetch.mock.calls[0][1]).toEqual({
         headers: {
           'Content-Type': 'application/json',

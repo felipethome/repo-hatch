@@ -88,8 +88,6 @@ const getEverything = function () {
 
 export default {
   getDefaultRepoSource,
-  buildActionStr,
-  buildRepoFullName,
   getAllSavedRepos,
   getDefaults,
   updateDefaults,

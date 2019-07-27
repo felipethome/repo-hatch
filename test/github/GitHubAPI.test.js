@@ -1,5 +1,5 @@
 jest.mock('../../src/Config', () => ({
-  baseURI: 'https://api.github.com',
+  gitHubBaseURI: 'https://api.github.com',
   getToken: () => Promise.resolve('abc'),
 }));
 
@@ -18,7 +18,7 @@ describe('testing GitHub api', () => {
     fetch.once(JSON.stringify({}));
 
     API.getUser().then(() => {
-      expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user`);
+      expect(fetch.mock.calls[0][0]).toEqual(`${Config.gitHubBaseURI}/user`);
       done();
     });
   });
@@ -27,7 +27,7 @@ describe('testing GitHub api', () => {
     fetch.once(JSON.stringify({}));
 
     API.getUserRepos().then(() => {
-      expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user/repos?per_page=100&affiliation=owner,collaborator`);
+      expect(fetch.mock.calls[0][0]).toEqual(`${Config.gitHubBaseURI}/user/repos?per_page=100&affiliation=owner,collaborator`);
       done();
     });
   });
@@ -36,7 +36,7 @@ describe('testing GitHub api', () => {
     fetch.once(JSON.stringify({}));
 
     API.getOrgs().then(() => {
-      expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user/orgs`);
+      expect(fetch.mock.calls[0][0]).toEqual(`${Config.gitHubBaseURI}/user/orgs`);
       done();
     });
   });
@@ -46,7 +46,7 @@ describe('testing GitHub api', () => {
     const orgName = 'some';
 
     API.getAllOrgRepos(orgName).then(() => {
-      expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/orgs/${orgName}/repos?per_page=100`);
+      expect(fetch.mock.calls[0][0]).toEqual(`${Config.gitHubBaseURI}/orgs/${orgName}/repos?per_page=100`);
       done();
     });
   });

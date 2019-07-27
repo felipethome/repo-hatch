@@ -15,7 +15,7 @@ const getUser = function () {
 };
 
 const getUserRepos = function () {
-  return getAllPages(`${Config.baseURI}/user/repos?per_page=100&affiliation=owner,collaborator`);
+  return getAllPages(`${Config.gitHubBaseURI}/user/repos?per_page=100&affiliation=owner,collaborator`);
 };
 
 const getOrgs = function () {
@@ -23,7 +23,7 @@ const getOrgs = function () {
 };
 
 const getAllOrgRepos = function (orgName) {
-  return getAllPages(`${Config.baseURI}/orgs/${orgName}/repos?per_page=100`);
+  return getAllPages(`${Config.gitHubBaseURI}/orgs/${orgName}/repos?per_page=100`);
 };
 
 export default {

@@ -10,7 +10,7 @@ const ghFetch = async function (path, options = {}, fullPath = false) {
 
   const response = {};
 
-  return fetch(`${fullPath ? '' : Config.baseURI}${path}`, opt)
+  return fetch(`${fullPath ? '' : Config.gitHubBaseURI}${path}`, opt)
     .then((r) => {
       response.headers = r.headers;
       response.status = r.status;

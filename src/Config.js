@@ -1,7 +1,9 @@
+import Storage from './common/Storage';
+
 const gitHubBaseURI = 'https://api.github.com';
 
-const getToken = function () {
-  return Storage.get({token: 'Not defined.'});
+const getToken = async function () {
+  return (await Storage.get({token: 'Not defined.'})).token;
 };
 
 export default {

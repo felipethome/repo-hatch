@@ -22,24 +22,40 @@ const Bg = (function () {
     chrome.browserAction.setBadgeText({text: textStr});
   };
 
-  const findRepo = async function (text, suggest) {
-    const repos = flatten(Object.values(await GitHub.getAllSavedRepos()));
-    const result = fuzzysort.go(text, repos, {key: 'fullName'}).map((repo) => (
-      {content: `${repo.obj.fullName} `, description: repo.obj.fullName}
-    ));
+  const getFlattenedReposVector = async function () {
+    return flatten(Object.values(await GitHub.getAllSavedRepos()));
+  };
+
+  const findRepo = function ({text, allReposVector}) {
+    return fuzzysort.go(text, allReposVector, {key: 'fullName'});
+  };
+
+  const toSuggestion = function (repo) {
+    return {content: `${repo.obj.fullName} `, description: repo.obj.fullName};
+  };
+
+  const handleTextChanged = async function (text, suggest) {
+    const result = findRepo({
+      text,
+      allReposVector: (await getFlattenedReposVector()),
+    }).map(toSuggestion);
+
     suggest(result);
   };
 
+  const repoExists = function ({repoFullName, allReposVector}) {
+    return allReposVector.find((curr) => curr.fullName === repoFullName);
+  };
+
   const handleEnteredText = async function (text) {
-    const parts = text.split(' ');
-    const repoFullName = await GitHubLogic.buildRepoFullName({
-      repo: parts[0],
-      defaultRepoSource: (await GitHub.getDefaultRepoSource()),
-    });
+    const [enteredRepoName, actionName, optionalFilter] = text.split(' ');
+    const allReposVector = await getFlattenedReposVector();
+    const repoFullName = repoExists({repoFullName: enteredRepoName, allReposVector}) ? enteredRepoName :
+      findRepo({text: enteredRepoName, allReposVector})[0].obj.fullName;
     const [repoSource, repoName] = repoFullName.split('/');
     const actionStr = await GitHubLogic.buildActionStr({
-      actionName: parts[1],
-      optionalFilter: parts[2],
+      actionName,
+      optionalFilter,
       defaultAction: (await Storage.get({defaultAction: ''})).defaultAction,
       savedActions: (await Storage.get({actions: defaultActions})).actions,
     });
@@ -55,11 +71,12 @@ const Bg = (function () {
   return {
     updateBadge,
     findRepo,
+    handleTextChanged,
     handleEnteredText,
   };
 })();
 
 window.Bg = Bg;
 
-chrome.omnibox.onInputChanged.addListener(Bg.findRepo);
+chrome.omnibox.onInputChanged.addListener(Bg.handleTextChanged);
 chrome.omnibox.onInputEntered.addListener(Bg.handleEnteredText);
