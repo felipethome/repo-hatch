@@ -103,7 +103,8 @@ export default class TextField extends React.Component {
       (this.props.defaultValue || '').toString().length || 0,
   };
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState((previousState) => {
       const newLength = nextProps.value !== undefined ?
         nextProps.value.toString().length :

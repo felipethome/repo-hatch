@@ -1,6 +1,6 @@
 jest.mock('../../src/Config', () => ({
   baseURI: 'https://api.github.com',
-  getToken: () => Promise.resolve('abc')
+  getToken: () => Promise.resolve('abc'),
 }));
 
 import Config from '../../src/Config';
@@ -11,7 +11,7 @@ global.fetch = jestFetchMock;
 
 describe('testing fetch', () => {
   beforeEach(() => {
-    fetch.resetMocks()
+    fetch.resetMocks();
   });
 
   test('github fetch', (done) => {

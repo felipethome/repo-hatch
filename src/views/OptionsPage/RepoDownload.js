@@ -6,14 +6,14 @@ import Dialog from '../material/Dialog';
 import classes from './OptionsPage.css';
 
 export default class RepoDownload extends React.Component {
+  static defaultProps = {
+    options: [],
+  };
+
   state = {
     loading: {},
     options: {},
     showDialog: false,
-  };
-
-  static defaultProps = {
-    options: [],
   };
 
   getLoadingState = (loaderName) => {
@@ -32,7 +32,7 @@ export default class RepoDownload extends React.Component {
     }));
   };
 
-  handleDownloadButtonClick = (e) => {
+  handleDownloadButtonClick = () => {
     this.changeDialogState(true);
   };
 
@@ -66,16 +66,16 @@ export default class RepoDownload extends React.Component {
     const {source, options} = this.props;
     const dialog = options.length ? (
       <Dialog
-          title="Download Options"
-          show={this.state.showDialog}
-          actions={
-            <RaisedButton onClick={this.handleDownloadConfirmation.bind(this, source.login)}>
-              Continue
-            </RaisedButton>
-          }
-          onClose={this.handleCloseDialog}
-        >
-          <div className={classes.dialog}>
+        title="Download Options"
+        show={this.state.showDialog}
+        actions={
+          <RaisedButton onClick={this.handleDownloadConfirmation.bind(this, source.login)}>
+            Continue
+          </RaisedButton>
+        }
+        onClose={this.handleCloseDialog}
+      >
+        <div className={classes.dialog}>
           {options.map((option) => (
             <div className={classes.dialogCheckboxContainer} key={option.name}>
               <label>{option.label}</label>
@@ -86,8 +86,8 @@ export default class RepoDownload extends React.Component {
               />
             </div>
           ))}
-          </div>
-        </Dialog>
+        </div>
+      </Dialog>
     ) : null;
 
     return (
@@ -97,8 +97,8 @@ export default class RepoDownload extends React.Component {
         <div className={classes.repoSourceEntryTitle}>{source.login}</div>
         <RaisedButton
           loading={this.getLoadingState(source.login)}
-          onClick={options.length ? this.handleDownloadButtonClick
-            : this.handleDownloadConfirmation.bind(this, source.login)}
+          onClick={options.length ? this.handleDownloadButtonClick :
+            this.handleDownloadConfirmation.bind(this, source.login)}
         >
           Download Repos
         </RaisedButton>

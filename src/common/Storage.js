@@ -2,9 +2,9 @@
 // to not break the promise chain.
 const Storage = (function () {
   const get = function (keys, area) {
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       if (area === 'sync') {
-        chrome.storage.sync.get(keys, function (items) {
+        chrome.storage.sync.get(keys, (items) => {
           if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
             resolve({});
@@ -13,7 +13,7 @@ const Storage = (function () {
         });
       }
       else {
-        chrome.storage.local.get(keys, function (items) {
+        chrome.storage.local.get(keys, (items) => {
           if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
             resolve({});
@@ -25,9 +25,9 @@ const Storage = (function () {
   };
 
   const set = function (keys, area) {
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       if (area === 'sync') {
-        chrome.storage.sync.set(keys, function () {
+        chrome.storage.sync.set(keys, () => {
           if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
             resolve({});
@@ -36,7 +36,7 @@ const Storage = (function () {
         });
       }
       else {
-        chrome.storage.local.set(keys, function () {
+        chrome.storage.local.set(keys, () => {
           if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
             resolve({});
@@ -48,9 +48,9 @@ const Storage = (function () {
   };
 
   const remove = function (keys, area) {
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       if (area === 'sync') {
-        chrome.storage.sync.remove(keys, function () {
+        chrome.storage.sync.remove(keys, () => {
           if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
             resolve({});
@@ -59,7 +59,7 @@ const Storage = (function () {
         });
       }
       else {
-        chrome.storage.local.remove(keys, function () {
+        chrome.storage.local.remove(keys, () => {
           if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
             resolve({});

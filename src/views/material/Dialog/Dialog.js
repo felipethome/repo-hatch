@@ -23,7 +23,7 @@ export default class Dialog extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
-  };
+  }
 
   handleKeyDown = (e) => {
     if (keycode(e) === 'esc') {

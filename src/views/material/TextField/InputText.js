@@ -28,10 +28,6 @@ export default class InputText extends React.Component {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       autoFocus,

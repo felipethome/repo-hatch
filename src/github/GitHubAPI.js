@@ -4,14 +4,14 @@ import ghFetch from './ghFetch';
 // https://github.com/github-tools/github/blob/master/lib/Requestable.js
 const getNextPage = function (linksHeader) {
   const links = (linksHeader || '').split(/\s*,\s*/); // splits and strips the urls
-  return links.reduce(function(nextUrl, link) {
-      if (link.search(/rel="next"/) !== -1) {
-        return (link.match(/<(.*)>/) || [])[1];
-      }
+  return links.reduce((nextUrl, link) => {
+    if (link.search(/rel="next"/) !== -1) {
+      return (link.match(/<(.*)>/) || [])[1];
+    }
 
-      return nextUrl;
+    return nextUrl;
   }, undefined);
-}
+};
 
 const getAllPages = async function (link, result = []) {
   if (!link) return result;

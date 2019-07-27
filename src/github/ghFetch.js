@@ -5,7 +5,7 @@ const ghFetch = async function (path, options = {}, fullPath = false) {
   const opt = Object.assign({}, options);
   opt.headers = Object.assign({
     'Content-Type': 'application/json',
-    'Authorization': `token ${(await Config.getToken())}`,
+    Authorization: `token ${(await Config.getToken())}`,
   }, options.headers);
 
   const response = {};

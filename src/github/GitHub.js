@@ -14,7 +14,7 @@ const getDefaults = async function () {
   return defaults;
 };
 
-const updateDefaults = async function(defaults) {
+const updateDefaults = async function (defaults) {
   const savedDefaults = await getDefaults();
   return Storage.set({defaults: Object.assign(savedDefaults, defaults)});
 };

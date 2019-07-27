@@ -3,8 +3,7 @@ import React from 'react';
 import classes from './Navbar.css';
 
 export default class Navbar extends React.Component {
-  
-   render() {
+  render() {
     return (
       <div className={classes.navbar}>
         {this.props.icon}

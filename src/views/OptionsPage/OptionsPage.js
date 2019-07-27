@@ -6,7 +6,6 @@ import GitHub from '../../github/GitHub';
 import RepoDownload from './RepoDownload';
 
 import classes from './OptionsPage.css';
-import CircularIndicatorIndeterminate from '../material/CircularIndicator/Indeterminate';
 
 export default class OptionsPage extends React.Component {
   state = {
@@ -21,7 +20,6 @@ export default class OptionsPage extends React.Component {
   };
 
   componentDidMount() {
-
     GitHub.getToken()
       .then((token) => {
         if (token) this.initialize(`${token.slice(0, 5)}${token ? '...' : ''}`);
@@ -134,7 +132,13 @@ export default class OptionsPage extends React.Component {
     return (
       <div className={classes.container}>
         <Navbar title="G-Hub Navigation" />
-        <button onClick={() => {GitHub.getEverything().then((options) => {console.log('options', options);})}}>Get saved options</button>
+        <button
+          onClick={() => {
+            GitHub.getEverything().then((options) => console.log('options', options));
+          }}
+        >
+          Get saved options
+        </button>
 
         <div className={classes.optionsContainer}>
           <div className={classes.optionsSection}>

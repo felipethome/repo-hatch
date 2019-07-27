@@ -1,6 +1,6 @@
 jest.mock('../../src/Config', () => ({
   baseURI: 'https://api.github.com',
-  getToken: () => Promise.resolve('abc')
+  getToken: () => Promise.resolve('abc'),
 }));
 
 import API from '../../src/github/GitHubAPI';
@@ -26,7 +26,7 @@ describe('testing GitHub api', () => {
   test('GitHub organizations', (done) => {
     fetch.once(JSON.stringify({}));
 
-    API.getOrgs().then((res) => {
+    API.getOrgs().then(() => {
       expect(fetch.mock.calls[0][0]).toEqual(`${Config.baseURI}/user/orgs`);
       done();
     });

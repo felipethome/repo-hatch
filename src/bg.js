@@ -60,7 +60,7 @@ const Bg = (function () {
     const actionStr = await buildActionStr(parts[1], parts[2]);
 
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-      var activeTab = tabs[0];
+      const activeTab = tabs[0];
       chrome.tabs.update(activeTab.id, {
         url: `https://github.com/${repoSource}/${repoName}${actionStr}`,
       });

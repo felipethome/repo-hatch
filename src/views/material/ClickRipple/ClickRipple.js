@@ -47,7 +47,8 @@ export default class ClickRipple extends React.Component {
     },
   };
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const newState = {};
 
     if (nextProps.active) {
