@@ -13,4 +13,70 @@ describe('github logic', () => {
     const nextPage = GitHubLogic.getNextPage(link);
     expect(nextPage).toEqual(undefined);
   });
+
+  it('correctly builds the action part of the url', () => {
+    const actionStr = GitHubLogic.buildActionStr({
+      actionName: 'p',
+      optionalFilter: 'author:felipethome',
+      defaultAction: '',
+      savedActions: {p: {action: 'pulls'}},
+    });
+
+    expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=author:felipethome');
+  });
+
+  it('correctly builds the action part of the url using the default action', () => {
+    const actionStr = GitHubLogic.buildActionStr({
+      actionName: '',
+      optionalFilter: '',
+      defaultAction: 'pulls',
+      savedActions: {p: {action: 'pulls'}},
+    });
+
+    expect(actionStr).toEqual('/pulls');
+  });
+
+  it('correctly builds the action part of the url without filter', () => {
+    const actionStr = GitHubLogic.buildActionStr({
+      actionName: 'p',
+      optionalFilter: '',
+      defaultAction: '',
+      savedActions: {p: {action: 'pulls'}},
+    });
+
+    expect(actionStr).toEqual('/pulls');
+  });
+
+  it('correctly builds the action part of the url with a composed filter', () => {
+    const actionStr = GitHubLogic.buildActionStr({
+      actionName: 'p',
+      optionalFilter: 'is:pr author:felipethome',
+      defaultAction: '',
+      savedActions: {p: {action: 'pulls'}},
+    });
+
+    expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=is:pr+author:felipethome');
+  });
+
+  it('correctly builds the action part of the url with the chosen filter', () => {
+    const actionStr = GitHubLogic.buildActionStr({
+      actionName: 'p',
+      optionalFilter: 'is:pr',
+      defaultAction: '',
+      savedActions: {p: {action: 'pulls', filter: 'author:felipethome'}},
+    });
+
+    expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=is:pr');
+  });
+
+  it('correctly builds the action part of the url with the predefined filter', () => {
+    const actionStr = GitHubLogic.buildActionStr({
+      actionName: 'p',
+      optionalFilter: '',
+      defaultAction: '',
+      savedActions: {p: {action: 'pulls', filter: 'author:felipethome'}},
+    });
+
+    expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=author:felipethome');
+  });
 });
