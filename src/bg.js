@@ -1,6 +1,7 @@
 import fuzzysort from 'fuzzysort';
 import {flatten} from 'ramda';
 import GitHub from './github/GitHub';
+import GitHubLogic from './github/GitHubLogic';
 import Storage from './common/Storage';
 
 const defaultActions = {
@@ -29,35 +30,19 @@ const Bg = (function () {
     suggest(result);
   };
 
-  const buildActionStr = async function (actionName, optionalFilter) {
-    if (!actionName) {
-      const defaultAction = (await Storage.get({defaultAction: ''})).defaultAction;
-      return defaultAction && `/${defaultAction}`;
-    }
-
-    const savedActions = (await Storage.get({actions: defaultActions})).actions;
-    const {action, filter: defaultFilter} = savedActions[actionName];
-    const filter = optionalFilter || defaultFilter;
-
-    if (!filter) return `/${action}`;
-
-    return `/${action}?utf8=%E2%9C%93&q=${filter.replace(' ', '+')}`;
-  };
-
-  const getDefaultRepoSource = async function () {
-    const savedOptions = await Storage.get({defaults: {}, user: {}});
-    return savedOptions.defaults.defaultRepoSource || savedOptions.user.login;
-  };
-
-  const buildRepoFullName = async function (repo) {
-    return repo.includes('/') ? repo : `${(await getDefaultRepoSource())}/${repo}`;
-  };
-
   const handleEnteredText = async function (text) {
     const parts = text.split(' ');
-    const repoFullName = await buildRepoFullName(parts[0]);
+    const repoFullName = await GitHubLogic.buildRepoFullName({
+      repo: parts[0],
+      defaultRepoSource: (await GitHub.getDefaultRepoSource()),
+    });
     const [repoSource, repoName] = repoFullName.split('/');
-    const actionStr = await buildActionStr(parts[1], parts[2]);
+    const actionStr = await GitHubLogic.buildActionStr({
+      actionName: parts[1],
+      optionalFilter: parts[2],
+      defaultAction: (await Storage.get({defaultAction: ''})).defaultAction,
+      savedActions: (await Storage.get({actions: defaultActions})).actions,
+    });
 
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
       const activeTab = tabs[0];

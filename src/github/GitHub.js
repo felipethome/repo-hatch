@@ -3,6 +3,11 @@ import API from './GitHubAPI';
 import Adapter from './GitHubAdapter';
 import Storage from '../common/Storage';
 
+const getDefaultRepoSource = async function () {
+  const savedOptions = await Storage.get({defaults: {}, user: {}});
+  return savedOptions.defaults.defaultRepoSource || savedOptions.user.login;
+};
+
 const getAllSavedRepos = async function () {
   return (await Storage.get({repos: {}})).repos;
 };
@@ -82,6 +87,9 @@ const getEverything = function () {
 };
 
 export default {
+  getDefaultRepoSource,
+  buildActionStr,
+  buildRepoFullName,
   getAllSavedRepos,
   getDefaults,
   updateDefaults,
