@@ -1,11 +1,11 @@
 import Config from '../Config';
 import ghFetch from './ghFetch';
-import Logic from './GitHubLogic';
+import GitHubLogic from './GitHubLogic';
 
 const getAllPages = async function (link, result = []) {
   if (!link) return result;
   const curr = await ghFetch(link, {}, true);
-  const nextLink = Logic.getNextPage(curr.headers.get('Link'));
+  const nextLink = GitHubLogic.getNextPage(curr.headers.get('Link'));
   result.push(curr);
   return getAllPages(nextLink, result);
 };
