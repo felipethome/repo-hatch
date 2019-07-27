@@ -14,7 +14,7 @@ describe('testing fetch', () => {
     fetch.resetMocks();
   });
 
-  test('github fetch', (done) => {
+  it('fetches using the right authorization header format and converts the response to json', (done) => {
     const body = {
       attr: 'a',
       other_attr: 'b',

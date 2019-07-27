@@ -14,7 +14,7 @@ describe('testing GitHub api', () => {
     fetch.resetMocks();
   });
 
-  test('GitHub user', (done) => {
+  it('calls the right url to get user', (done) => {
     fetch.once(JSON.stringify({}));
 
     API.getUser().then(() => {
@@ -23,7 +23,7 @@ describe('testing GitHub api', () => {
     });
   });
 
-  test('GitHub user repos', (done) => {
+  it('calls the right url to get user repos', (done) => {
     fetch.once(JSON.stringify({}));
 
     API.getUserRepos().then(() => {
@@ -32,7 +32,7 @@ describe('testing GitHub api', () => {
     });
   });
 
-  test('GitHub organizations', (done) => {
+  it('calls the right url to get orgs', (done) => {
     fetch.once(JSON.stringify({}));
 
     API.getOrgs().then(() => {
@@ -41,7 +41,7 @@ describe('testing GitHub api', () => {
     });
   });
 
-  test('GitHub organization repos', (done) => {
+  it('calls the right url to get organization repos', (done) => {
     fetch.once(JSON.stringify({}));
     const orgName = 'some';
 
