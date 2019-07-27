@@ -38,7 +38,8 @@ const getAllOrgRepos = function (orgName) {
 };
 
 export default {
-  ghFetch,
+  getNextPage,
+  getAllPages,
   getUser,
   getUserRepos,
   getOrgs,

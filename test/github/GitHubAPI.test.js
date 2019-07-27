@@ -11,7 +11,7 @@ global.fetch = jestFetchMock;
 
 describe('testing GitHub api', () => {
   beforeEach(() => {
-    fetch.resetMocks()
+    fetch.resetMocks();
   });
 
   test('gets the GitHub user', (done) => {
