@@ -21,12 +21,10 @@ export default class OptionsPage extends React.Component {
   };
 
   componentDidMount() {
-    const newState = {};
 
     GitHub.getToken()
       .then((token) => {
-        newState.token = `${token.slice(0, 5)}${token ? '...' : ''}`;
-        if (token) this.initialize(token);
+        if (token) this.initialize(`${token.slice(0, 5)}${token ? '...' : ''}`);
       });
   }
 
