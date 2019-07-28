@@ -57,7 +57,7 @@ const Bg = (function () {
       actionName,
       optionalFilter,
       defaultAction: (await Storage.get({defaultAction: ''})).defaultAction,
-      savedActions: (await Storage.get({actions: defaultActions})).actions,
+      savedActions: Object.assign(defaultActions, (await Storage.get({actions: {}})).actions),
     });
 
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
