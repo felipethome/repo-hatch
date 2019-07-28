@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FlatButton from '../material/FlatButton';
 import Navbar from '../material/Navbar';
 import TextField from '../material/TextField';
+import CircularIndicator from '../material/CircularIndicator/Indeterminate';
 import GitHub from '../../github/GitHub';
 import RepoDownload from './RepoDownload';
 
@@ -35,6 +36,8 @@ export default class OptionsPage extends React.Component {
     this.props.bg.updateBadge('');
     const newState = {token};
 
+    this.setLoadingState('initializing', true);
+
     GitHub.updateUser()
       .then((user) => {
         newState.user = user;
@@ -43,6 +46,9 @@ export default class OptionsPage extends React.Component {
       .then((orgs) => {
         newState.orgs = orgs;
         return this.setState(() => newState);
+      })
+      .finally(() => {
+        this.setLoadingState('initializing', false);
       });
   };
 
@@ -95,6 +101,13 @@ export default class OptionsPage extends React.Component {
             </div>
           </div>
         </React.Fragment>
+      );
+    }
+    else if (this.getLoadingState('initializing')) {
+      optionSections = (
+        <div className={classes.loaderContainer}>
+          <CircularIndicator className={classes.loader} />
+        </div>
       );
     }
 
