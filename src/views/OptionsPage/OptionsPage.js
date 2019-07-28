@@ -172,7 +172,6 @@ export default class OptionsPage extends React.Component {
               </div>
             </div>
           </div>
-
           {optionSections}
         </div>
       </div>
