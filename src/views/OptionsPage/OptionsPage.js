@@ -141,13 +141,15 @@ export default class OptionsPage extends React.Component {
     return (
       <div className={classes.container}>
         <Navbar title="G-Hub Navigation" />
-        <button
-          onClick={() => {
-            GitHub.getEverything().then((options) => console.log('options', options));
-          }}
-        >
-          Get saved options
-        </button>
+        {process.env.NODE_ENV === 'development' ?
+          <RaisedButton
+            onClick={() => {
+              GitHub.getEverything().then((options) => console.log('options', options));
+            }}
+            style={{margin: '12px auto'}}
+          >
+            Get saved options
+          </RaisedButton> : null}
 
         <div className={classes.optionsContainer}>
           <div className={classes.optionsSection}>
