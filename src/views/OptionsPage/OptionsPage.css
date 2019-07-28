@@ -8,7 +8,7 @@
 }
 
 .optionsSection>h2 {
-  padding-bottom: 0px;
+  padding-bottom: 0;
   width: 100%;
   color: var(--secondary-text-color);
 }
@@ -55,7 +55,7 @@
   align-items: center;
   width: 100%;
   border-bottom: 1px solid var(--bright-border-color);
-  padding: 10px 0;
+  padding: 12px 0;
 }
 
 .repoSourceEntryContainer>button {
@@ -63,11 +63,11 @@
 }
 
 .repoSourceEntryTitle {
-  margin-left: 10px;
+  margin-left: 12px;
   font-size: 18px;
 }
 
 .repoSourceEntryImage {
-  width: 50px;
+  width: 52px;
   height: auto;
 }
