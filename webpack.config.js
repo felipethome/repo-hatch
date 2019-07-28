@@ -15,9 +15,6 @@ module.exports = {
     'options-page': [
       './src/views/OptionsPage/index.js',
     ],
-    'popup-page': [
-      './src/views/PopupPage/index.js',
-    ],
   },
   output: {
     // Absolute path to the output directory.
