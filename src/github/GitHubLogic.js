@@ -23,7 +23,7 @@ const buildActionStr = function ({actionName, optionalFilter, defaultAction, sav
     return defaultAction && `/${defaultAction}`;
   }
 
-  const {action, filter: defaultFilter} = savedActionsObj[actionName];
+  const {action, filter: defaultFilter} = savedActionsObj[actionName][0];
   const filter = optionalFilter || defaultFilter;
 
   if (!filter) return `/${action}`;
