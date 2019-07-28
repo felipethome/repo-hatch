@@ -17,9 +17,6 @@ export default class OptionsPage extends React.Component {
   };
 
   state = {
-    defaults: {
-      defaultRepoSource: '',
-    },
     loading: {},
     orgs: [],
     user: {},
@@ -45,10 +42,6 @@ export default class OptionsPage extends React.Component {
       })
       .then((orgs) => {
         newState.orgs = orgs;
-        return GitHub.getDefaults();
-      })
-      .then((defaults) => {
-        newState.defaults = defaults;
         return this.setState(() => newState);
       });
   };
@@ -69,18 +62,6 @@ export default class OptionsPage extends React.Component {
     this.setState(() => ({[id]: value}));
   };
 
-  handleDefaultsTextChange = (e) => {
-    const id = e.currentTarget.id;
-    const value = e.currentTarget.value;
-    this.setState((previousState) => ({
-      defaults: Object.assign(previousState.defaults, {[id]: value}),
-    }));
-  };
-
-  handleGeneralSaveButton = () => {
-    GitHub.updateDefaults({defaultRepoSource: this.state.defaults.defaultRepoSource});
-  };
-
   handleTokenSaveButton = () => {
     if (this.state.token.length === 40) {
       GitHub.updateToken(this.state.token)
@@ -91,33 +72,12 @@ export default class OptionsPage extends React.Component {
   };
 
   render() {
-    const {user, orgs, defaults, token} = this.state;
+    const {user, orgs, token} = this.state;
     let optionSections;
 
     if (Object.entries(user).length > 0) {
       optionSections = (
         <React.Fragment>
-          <div className={classes.optionsSection}>
-            <h2>General</h2>
-            <div className={classes.card}>
-              <div className={classes.field}>
-                <TextField
-                  id="defaultRepoSource"
-                  label="Default repository namespace"
-                  helperText="Defaults to your username."
-                  floatingLabel
-                  value={defaults.defaultRepoSource}
-                  onChange={this.handleDefaultsTextChange}
-                />
-              </div>
-              <div className={classes.saveButtonContainer}>
-                <FlatButton onClick={this.handleGeneralSaveButton}>
-                  Save
-                </FlatButton>
-              </div>
-            </div>
-          </div>
-
           <div className={classes.optionsSection}>
             <h2>Organizations</h2>
             <div className={classes.card}>
