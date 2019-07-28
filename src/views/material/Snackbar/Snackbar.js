@@ -1,6 +1,5 @@
 /**
  * author: Felipe Thome
- * 2017
  */
 
 import React from 'react';
