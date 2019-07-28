@@ -98,3 +98,34 @@
   width: 52px;
   height: auto;
 }
+
+.actionsTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.actionsTable>thead>tr {
+  height: 24px;
+  line-height: 100%;
+  text-align: left;
+  color: var(--secondary-text-color);
+  border-bottom: 1px solid var(--divisor-border-color);
+}
+
+.actionsTable>thead>tr>th {
+  vertical-align: middle;
+}
+
+.actionsTable>tbody>tr {
+  padding: 12px 0;
+  height: 48px;
+  line-height: 100%;
+  text-align: left;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--divisor-border-color);
+}
+
+.actionsTable>tbody>tr>td {
+  padding-right: 24px;
+}

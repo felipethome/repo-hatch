@@ -46,7 +46,7 @@
   margin: 0 auto;
   height: 2px;
   width: 0%;
-  background: var(--primary-color);
+  background: var(--accent-color);
   text-align: center;
   transition: 0.2s ease-out all;
 }

@@ -2,14 +2,6 @@ import fuzzysort from 'fuzzysort';
 import {flatten} from 'ramda';
 import GitHub from './github/GitHub';
 import GitHubLogic from './github/GitHubLogic';
-import Storage from './common/Storage';
-
-const defaultActions = {
-  p: {action: 'pulls'},
-  i: {action: 'issues'},
-  t: {action: 'find/master'},
-  s: {action: 'search'},
-};
 
 const Bg = (function () {
   const updateBadge = function (text, color = {color: '#4CAF50'}) {
@@ -56,8 +48,8 @@ const Bg = (function () {
     const actionStr = await GitHubLogic.buildActionStr({
       actionName,
       optionalFilter,
-      defaultAction: (await Storage.get({defaultAction: ''})).defaultAction,
-      savedActions: Object.assign(defaultActions, (await Storage.get({actions: {}})).actions),
+      defaultAction: (await GitHub.getDefaultAction()),
+      savedActions: (await GitHub.getSavedActions()),
     });
 
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {

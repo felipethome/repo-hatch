@@ -8,6 +8,7 @@ export default class Select extends React.Component {
   static displayName = 'Select';
 
   static propTypes = {
+    addEmptyOption: PropTypes.bool,
     children: PropTypes.any,
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -28,6 +29,7 @@ export default class Select extends React.Component {
 
   render() {
     const {
+      addEmptyOption,
       children,
       className,
       disabled,
@@ -70,7 +72,7 @@ export default class Select extends React.Component {
           value={value}
           onChange={this._handleChange}
         >
-          <option disabled />
+          {addEmptyOption ? <option disabled /> : null}
           {children}
         </select>
         {labelElem}

@@ -6,6 +6,7 @@ import TextField from '../material/TextField';
 import CircularIndicator from '../material/CircularIndicator/Indeterminate';
 import GitHub from '../../github/GitHub';
 import RepoDownload from './RepoDownload';
+import Actions from './Actions';
 
 import classes from './OptionsPage.css';
 
@@ -102,6 +103,13 @@ export default class OptionsPage extends React.Component {
                   updateFunction={GitHub.updateAllOrgRepos}
                 />
               ))}
+            </div>
+          </div>
+
+          <div className={classes.optionsSection}>
+            <h2>Actions</h2>
+            <div className={classes.card}>
+              <Actions />
             </div>
           </div>
         </React.Fragment>

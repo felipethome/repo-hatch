@@ -1,7 +1,15 @@
 import {flatten} from 'ramda';
+import uuidv4 from 'uuid/v4';
 import API from './GitHubAPI';
 import Adapter from './GitHubAdapter';
 import Storage from '../common/Storage';
+
+const defaultActions = {
+  p: {id: uuidv4(), name: 'p', action: 'pulls'},
+  i: {id: uuidv4(), name: 'i', action: 'issues'},
+  t: {id: uuidv4(), name: 't', action: 'find/master'},
+  s: {id: uuidv4(), name: 's', action: 'search'},
+};
 
 const getDefaultRepoSource = async function () {
   const savedOptions = await Storage.get({defaults: {}, user: {}});
@@ -82,8 +90,16 @@ const updateToken = async function (newToken) {
   return newToken;
 };
 
+const getDefaultAction = async function () {
+  return (await Storage.get({defaultAction: ''})).defaultAction;
+};
+
+const getSavedActions = async function () {
+  return (await Storage.get({actions: defaultActions})).actions;
+};
+
 const getEverything = function () {
-  return Storage.get(['orgs', 'repos', 'user', 'defaults', 'token']);
+  return Storage.get(null);
 };
 
 export default {
@@ -100,5 +116,7 @@ export default {
   updateAllOrgRepos,
   getToken,
   updateToken,
+  getDefaultAction,
+  getSavedActions,
   getEverything,
 };

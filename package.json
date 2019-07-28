@@ -45,6 +45,7 @@
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-inline-transition-group": "^2.2.1"
+    "react-inline-transition-group": "^2.2.1",
+    "uuid": "^3.3.2"
   }
 }
