@@ -1,4 +1,4 @@
-# G-Hub Navigation
+# RepoHatch
 
 Chrome extension that helps you to access your repositories pages with the minimum effort from the address bar.
 

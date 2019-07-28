@@ -117,7 +117,7 @@ export default class OptionsPage extends React.Component {
 
     return (
       <div className={classes.container}>
-        <Navbar title="G-Hub Navigation" />
+        <Navbar title="RepoHatch" />
         {process.env.NODE_ENV === 'development' ?
           <FlatButton
             onClick={() => {
