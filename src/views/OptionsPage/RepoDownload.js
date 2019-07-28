@@ -11,7 +11,7 @@ export default class RepoDownload extends React.Component {
     /**
      * Called when the download of the repos is finished.
      */
-    downloadFinished: PropTypes.function,
+    downloadFinished: PropTypes.func,
     /**
      * The download options. If not empty it will render a modal with checkboxes,
      * for all download options supplied in this property when the user clicks on
@@ -28,7 +28,7 @@ export default class RepoDownload extends React.Component {
     /**
      * The function to be called when the user clicks on the download button.
      */
-    updateFunction: PropTypes.function,
+    updateFunction: PropTypes.func,
   };
 
   static defaultProps = {
