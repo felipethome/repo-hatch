@@ -56,7 +56,7 @@
 .closeIcon {
   width: 24px;
   height: 24px;
-  fill: var(--bright-text-color);
+  fill: var(--primary-bg-text-color);
 }
 
 .closeButtonContainer {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from '../material/RaisedButton';
+import FlatButton from '../material/FlatButton';
 import Checkbox from '../material/Checkbox';
 import Dialog from '../material/Dialog';
 
@@ -94,9 +94,9 @@ export default class RepoDownload extends React.Component {
         title="Download Options"
         show={this.state.showDialog}
         actions={
-          <RaisedButton onClick={this.handleDownloadConfirmation.bind(this, source.login)}>
+          <FlatButton onClick={this.handleDownloadConfirmation.bind(this, source.login)}>
             Continue
-          </RaisedButton>
+          </FlatButton>
         }
         onClose={this.handleCloseDialog}
       >
@@ -118,15 +118,17 @@ export default class RepoDownload extends React.Component {
     return (
       <div className={classes.repoSourceEntryContainer} key={source.login}>
         {dialog}
-        <img className={classes.repoSourceEntryImage} src={source.avatarUrl} />
+        <div className={classes.repoSourceEntryImageContainer}>
+          <img className={classes.repoSourceEntryImage} src={source.avatarUrl} />
+        </div>
         <div className={classes.repoSourceEntryTitle}>{source.login}</div>
-        <RaisedButton
+        <FlatButton
           loading={this.getLoadingState(source.login)}
           onClick={options.length ? this.handleDownloadButtonClick :
             this.handleDownloadConfirmation.bind(this, source.login)}
         >
           Download Repos Metadata
-        </RaisedButton>
+        </FlatButton>
       </div>
     );
   }

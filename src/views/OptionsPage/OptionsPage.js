@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from '../material/RaisedButton';
+import FlatButton from '../material/FlatButton';
 import Navbar from '../material/Navbar';
 import TextField from '../material/TextField';
 import GitHub from '../../github/GitHub';
@@ -111,9 +111,9 @@ export default class OptionsPage extends React.Component {
                 />
               </div>
               <div className={classes.saveButtonContainer}>
-                <RaisedButton onClick={this.handleGeneralSaveButton}>
+                <FlatButton onClick={this.handleGeneralSaveButton}>
                   Save
-                </RaisedButton>
+                </FlatButton>
               </div>
             </div>
           </div>
@@ -142,14 +142,14 @@ export default class OptionsPage extends React.Component {
       <div className={classes.container}>
         <Navbar title="G-Hub Navigation" />
         {process.env.NODE_ENV === 'development' ?
-          <RaisedButton
+          <FlatButton
             onClick={() => {
               GitHub.getEverything().then((options) => console.log('options', options));
             }}
             style={{margin: '12px auto'}}
           >
             Get saved options
-          </RaisedButton> : null}
+          </FlatButton> : null}
 
         <div className={classes.optionsContainer}>
           <div className={classes.optionsSection}>
@@ -166,9 +166,9 @@ export default class OptionsPage extends React.Component {
                 />
               </div>
               <div className={classes.saveButtonContainer}>
-                <RaisedButton onClick={this.handleTokenSaveButton}>
+                <FlatButton onClick={this.handleTokenSaveButton}>
                   Save
-                </RaisedButton>
+                </FlatButton>
               </div>
             </div>
           </div>

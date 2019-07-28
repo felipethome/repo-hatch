@@ -11,16 +11,15 @@
   outline: none;
   overflow: hidden;
   user-select: none;
-  border: none;
   border-radius: 2px;
-  background: var(--primary-color);
-  color: var(--primary-bg-text-color);
+  border: 1px solid var(--button-border-color);
+  background: var(--background-color);
+  color: var(--accent-color);
   font-family: "Roboto", sans-serif;
   font-size: 1em;
   font-weight: 500;
   text-decoration: none;
   text-transform: uppercase;
-  box-shadow: var(--shadow-2dp);
   transition: all 200ms ease-out;
 }
 
@@ -37,8 +36,8 @@
 .button:disabled {
   background: var(--disabled-color);
   color: var(--disabled-text-color);
+  border: 1px solid var(--disabled-color);
   cursor: not-allowed;
-  box-shadow: var(--shadow-0dp);
 }
 
 .childrenContainer {

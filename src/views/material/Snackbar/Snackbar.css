@@ -13,7 +13,7 @@
   border-radius: 0;
   font-family: "Roboto", sans-serif;
   font-size: 1em;
-  color: var(--bright-text-color);
+  color: var(--snackbar-text-color);
   background: var(--snackbar-background-color);
   visibility: hidden;
   transition: visibility 150ms ease-in, top 150ms ease-in;

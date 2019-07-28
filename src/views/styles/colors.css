@@ -1,31 +1,55 @@
 :global :root {
-  --navbar-color: #212121;
-  
   --background-color: #FFF;
   --secondary-background-color: #F5F5F5;
-  --hover-background-color: #424242;
+  --image-background-color: transparent;
+  --hover-background-color: #EFEFEF;
   --hover-gray-background-color: rgba(153, 153, 153, .2);
 
   --primary-color: #212121;
   --accent-color: #4CAF50;
-  --secondary-color: #F6f6f6;
-  --disabled-color: rgba(0, 0, 0, .12);
+  --disabled-color: #E0E0E0;
   --error-color: #F44336;
 
-  --bright-text-color: #FFF;
-  --dark-text-color: #212121;
-  --medium-text-color: #616161;
+  --text-color: #212121;
   --secondary-text-color: rgba(0, 0, 0, .54);
+  --primary-bg-text-color: #F5F5F5;
   --disabled-text-color: rgba(0, 0, 0, .26);
+  --label-text-color: #4CAF50;
 
   --border-color: rgba(0, 0, 0, .54);
-  --bright-border-color: #E0E0E0;
-  --disabled-border-color: rgba(0, 0, 0, .54);
-
-  --table-header-color: rgba(0, 0, 0, .54);
-  --table-header-selected-items-color: #A5D7A7;
-  --table-row-selected-color: #F5F5F5;
-  --table-row-hover-color: #EEE;
+  --divisor-border-color: #E0E0E0;
+  --disabled-border-color: #E0E0E0;
+  --button-border-color: #4CAF5050;
 
   --snackbar-background-color: #323232;
+  --snackbar-text-color: #F5F5F5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global :root {
+    --background-color: #292a2d;
+    --secondary-background-color: #202124;
+    --image-background-color: #F5F5F5;
+    --hover-background-color: #424242;
+    --hover-gray-background-color: rgba(153, 153, 153, .2);
+  
+    --primary-color: #292a2d;
+    --accent-color: #4CAF50;
+    --disabled-color: #424242;
+    --error-color: #F44336;
+  
+    --text-color: #F5F5F5;
+    --secondary-text-color: #9E9E9E;
+    --primary-bg-text-color: #F5F5F5;
+    --disabled-text-color: #9E9E9E;
+    --label-text-color: #4CAF50;
+  
+    --border-color: rgba(0, 0, 0, .54);
+    --divisor-border-color: #424242;
+    --disabled-border-color: rgba(0, 0, 0, .54);
+    --button-border-color: #4CAF5050;
+  
+    --snackbar-background-color: #323232;
+    --snackbar-text-color: #F5F5F5;
+  }
 }

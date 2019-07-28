@@ -27,7 +27,7 @@
   background-color: transparent;
   font-family: "Roboto", sans-serif;
   font-size: 1em;
-  color: var(--dark-text-color);
+  color: var(--text-color);
   border: none;
   border-bottom: 1px solid var(--border-color);
   border-radius: 0px;
