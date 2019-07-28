@@ -130,7 +130,7 @@ module.exports = {
     'react/no-multi-comp': ERROR,
     'react/no-string-refs': ERROR,
     'react/no-unknown-property': ERROR,
-    'react/prop-types': OFF,
+    'react/prop-types': ERROR,
     'react/self-closing-comp': ERROR,
     'react/sort-comp': ERROR,
   },

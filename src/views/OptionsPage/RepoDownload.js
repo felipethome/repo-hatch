@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RaisedButton from '../material/RaisedButton';
 import Checkbox from '../material/Checkbox';
 import Dialog from '../material/Dialog';
@@ -6,6 +7,30 @@ import Dialog from '../material/Dialog';
 import classes from './OptionsPage.css';
 
 export default class RepoDownload extends React.Component {
+  static propTypes = {
+    /**
+     * Called when the download of the repos is finished.
+     */
+    downloadFinished: PropTypes.function,
+    /**
+     * The download options. If not empty it will render a modal with checkboxes,
+     * for all download options supplied in this property when the user clicks on
+     * the download button.
+     */
+    options: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string,
+      name: PropTypes.string,
+    })),
+    /**
+     * The object with the organization or user data.
+     */
+    source: PropTypes.object,
+    /**
+     * The function to be called when the user clicks on the download button.
+     */
+    updateFunction: PropTypes.function,
+  };
+
   static defaultProps = {
     options: [],
   };
