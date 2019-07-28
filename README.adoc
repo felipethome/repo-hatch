@@ -18,7 +18,12 @@ Type some part of your repository name in the chrome address bar and the extensi
 
 Once you install the extension you will need to generate a GitHub access token. The following image shows the required permissions:
 
-image::scopes.png[Required GitHub permissions so the extension can download the necessary information]
+image::scopes.png[Required GitHub permissions so the extension can download private repository information]
+
+[NOTE]
+--
+If you don't want the extension to have access to your private repositories remove the `repo` permission and select the `public_repo` permission.
+--
 
 == Build Production Version
 
