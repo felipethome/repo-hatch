@@ -1,7 +1,7 @@
 import {pick} from 'ramda';
 
 const adaptUser = function (user) {
-  return pick(['id', 'login', 'avatarUrl', 'name', 'company', 'email'], user);
+  return pick(['id', 'login', 'avatarUrl', 'name', 'company'], user);
 };
 
 const adaptOrg = function (org) {
