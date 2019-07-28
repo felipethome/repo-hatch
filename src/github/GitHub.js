@@ -11,28 +11,8 @@ const defaultActions = [
   {id: uuidv4(), name: 's', action: 'search'},
 ];
 
-const getDefaultRepoSource = async function () {
-  const savedOptions = await Storage.get({defaults: {}, user: {}});
-  return savedOptions.defaults.defaultRepoSource || savedOptions.user.login;
-};
-
 const getAllSavedRepos = async function () {
   return (await Storage.get({repos: {}})).repos;
-};
-
-const getDefaults = async function () {
-  const defaults = (await Storage.get({defaults: {
-    defaultRepoSource: '',
-  }})).defaults;
-  return defaults;
-};
-
-const updateDefaults = async function (defaults) {
-  const savedDefaults = await getDefaults();
-  const newDefaults = Object.assign(savedDefaults, defaults);
-  await Storage.set({defaults: newDefaults});
-
-  return newDefaults;
 };
 
 const getUser = async function () {
@@ -111,10 +91,7 @@ const getEverything = function () {
 };
 
 export default {
-  getDefaultRepoSource,
   getAllSavedRepos,
-  getDefaults,
-  updateDefaults,
   getUser,
   updateUser,
   updateUserRepos,
