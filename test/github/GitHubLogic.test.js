@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import GitHubLogic from '../../src/github/GitHubLogic';
 
 describe('github logic', () => {
@@ -19,7 +20,7 @@ describe('github logic', () => {
       actionName: 'p',
       optionalFilter: 'author:felipethome',
       defaultAction: '',
-      savedActions: {p: {action: 'pulls'}},
+      savedActions: [{id: uuidv4(), name: 'p', action: 'pulls'}],
     });
 
     expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=author:felipethome');
@@ -30,7 +31,7 @@ describe('github logic', () => {
       actionName: '',
       optionalFilter: 'author:felipethome',
       defaultAction: '',
-      savedActions: {p: {action: 'pulls'}},
+      savedActions: [{id: uuidv4(), name: 'p', action: 'pulls'}],
     });
 
     expect(actionStr).toEqual('');
@@ -41,7 +42,7 @@ describe('github logic', () => {
       actionName: '',
       optionalFilter: '',
       defaultAction: 'pulls',
-      savedActions: {p: {action: 'pulls'}},
+      savedActions: [{id: uuidv4(), name: 'p', action: 'pulls'}],
     });
 
     expect(actionStr).toEqual('/pulls');
@@ -52,7 +53,7 @@ describe('github logic', () => {
       actionName: 'p',
       optionalFilter: '',
       defaultAction: '',
-      savedActions: {p: {action: 'pulls'}},
+      savedActions: [{id: uuidv4(), name: 'p', action: 'pulls'}],
     });
 
     expect(actionStr).toEqual('/pulls');
@@ -63,7 +64,7 @@ describe('github logic', () => {
       actionName: 'p',
       optionalFilter: 'is:pr author:felipethome',
       defaultAction: '',
-      savedActions: {p: {action: 'pulls'}},
+      savedActions: [{id: uuidv4(), name: 'p', action: 'pulls'}],
     });
 
     expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=is:pr+author:felipethome');
@@ -74,7 +75,7 @@ describe('github logic', () => {
       actionName: 'p',
       optionalFilter: 'is:pr',
       defaultAction: '',
-      savedActions: {p: {action: 'pulls', filter: 'author:felipethome'}},
+      savedActions: [{id: uuidv4(), name: 'p', action: 'pulls', filter: 'author:felipethome'}],
     });
 
     expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=is:pr');
@@ -85,7 +86,7 @@ describe('github logic', () => {
       actionName: 'p',
       optionalFilter: '',
       defaultAction: '',
-      savedActions: {p: {action: 'pulls', filter: 'author:felipethome'}},
+      savedActions: [{id: uuidv4(), name: 'p', action: 'pulls', filter: 'author:felipethome'}],
     });
 
     expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=author:felipethome');
