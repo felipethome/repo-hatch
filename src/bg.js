@@ -50,8 +50,8 @@ const Bg = (function () {
   const handleEnteredText = async function (text) {
     const [enteredRepoName, actionName, optionalFilter] = text.split(' ');
     const allReposVector = await getFlattenedReposVector();
-    const repoFullName = repoExists({repoFullName: enteredRepoName, allReposVector}) ? enteredRepoName :
-      findRepo({text: enteredRepoName, allReposVector})[0].obj.fullName;
+    const repoFullName = (allReposVector.length === 0 || repoExists({repoFullName: enteredRepoName, allReposVector})) ?
+      enteredRepoName : findRepo({text: enteredRepoName, allReposVector})[0].obj.fullName;
     const [repoSource, repoName] = repoFullName.split('/');
     const actionStr = await GitHubLogic.buildActionStr({
       actionName,
@@ -77,6 +77,10 @@ const Bg = (function () {
 })();
 
 window.Bg = Bg;
+
+GitHub.getToken().then((token) => {
+  if (!token) Bg.updateBadge('!');
+});
 
 chrome.omnibox.onInputChanged.addListener(Bg.handleTextChanged);
 chrome.omnibox.onInputEntered.addListener(Bg.handleEnteredText);

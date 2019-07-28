@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RaisedButton from '../material/RaisedButton';
 import Navbar from '../material/Navbar';
 import TextField from '../material/TextField';
@@ -8,6 +9,13 @@ import RepoDownload from './RepoDownload';
 import classes from './OptionsPage.css';
 
 export default class OptionsPage extends React.Component {
+  static propTypes = {
+    /**
+     * Background page module reference.
+     */
+    bg: PropTypes.any,
+  };
+
   state = {
     defaults: {
       defaultRepoSource: '',
@@ -27,6 +35,7 @@ export default class OptionsPage extends React.Component {
   }
 
   initialize = (token) => {
+    this.props.bg.updateBadge('');
     const newState = {token};
 
     GitHub.updateUser()
