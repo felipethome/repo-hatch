@@ -62,6 +62,10 @@ export default class OptionsPage extends React.Component {
     }));
   };
 
+  handleTokenTextFocus = (e) => {
+    e.currentTarget.select();
+  };
+
   handleTokenTextChange = (e) => {
     const id = e.currentTarget.id;
     const value = e.currentTarget.value;
@@ -136,6 +140,7 @@ export default class OptionsPage extends React.Component {
                   floatingLabel
                   value={token}
                   onChange={this.handleTokenTextChange}
+                  onFocus={this.handleTokenTextFocus}
                 />
               </div>
               <div className={classes.saveButtonContainer}>
