@@ -3,7 +3,6 @@
   --secondary-background-color: #F5F5F5;
   --image-background-color: transparent;
   --hover-background-color: #EFEFEF;
-  --hover-gray-background-color: rgba(153, 153, 153, .2);
 
   --primary-color: #212121;
   --accent-color: #4CAF50;
@@ -13,6 +12,7 @@
   --text-color: #212121;
   --secondary-text-color: rgba(0, 0, 0, .54);
   --primary-bg-text-color: #F5F5F5;
+  --accent-bg-text-color: #F5F5F5;
   --disabled-text-color: rgba(0, 0, 0, .26);
   --label-text-color: #4CAF50;
 
@@ -23,6 +23,9 @@
 
   --snackbar-background-color: #323232;
   --snackbar-text-color: #F5F5F5;
+
+  --flat-button-hover-background-color: #EFEFEF;
+  --raised-button-hover-background-color: #43A047;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,7 +34,6 @@
     --secondary-background-color: #202124;
     --image-background-color: #F5F5F5;
     --hover-background-color: #424242;
-    --hover-gray-background-color: rgba(153, 153, 153, .2);
   
     --primary-color: #292a2d;
     --accent-color: #4CAF50;
@@ -41,6 +43,7 @@
     --text-color: #F5F5F5;
     --secondary-text-color: #9E9E9E;
     --primary-bg-text-color: #F5F5F5;
+    --accent-bg-text-color: #F5F5F5;
     --disabled-text-color: #9E9E9E;
     --label-text-color: #4CAF50;
   
@@ -51,5 +54,8 @@
   
     --snackbar-background-color: #323232;
     --snackbar-text-color: #F5F5F5;
+
+    --flat-button-hover-background-color: #424242;
+    --raised-button-hover-background-color: #43A047;
   }
 }

@@ -12,8 +12,8 @@
   user-select: none;
   border: none;
   border-radius: 2px;
-  background: var(--primary-color);
-  color: var(--primary-bg-text-color);
+  background: var(--accent-color);
+  color: var(--accent-bg-text-color);
   font-family: "Roboto", sans-serif;
   font-size: 1em;
   font-weight: 500;
@@ -29,7 +29,7 @@
 
 @media (hover) {
   .button:hover {
-    background: var(--hover-background-color);
+    background: var(--raised-button-hover-background-color);
   }
 }
 

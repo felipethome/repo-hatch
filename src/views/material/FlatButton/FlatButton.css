@@ -28,7 +28,7 @@
 
 @media (hover) {
   .button:hover {
-    background: var(--hover-background-color);
+    background: var(--flat-button-hover-background-color);
   }
 }
 
