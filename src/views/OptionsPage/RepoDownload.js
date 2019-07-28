@@ -100,7 +100,7 @@ export default class RepoDownload extends React.Component {
           onClick={options.length ? this.handleDownloadButtonClick :
             this.handleDownloadConfirmation.bind(this, source.login)}
         >
-          Download Repos
+          Download Repos Metadata
         </RaisedButton>
       </div>
     );
