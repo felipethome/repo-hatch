@@ -1,3 +1,8 @@
+/**
+ * author: Felipe Thome
+ * 2016
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputText from './InputText';
