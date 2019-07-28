@@ -151,7 +151,7 @@ export default class OptionsPage extends React.Component {
                   onFocus={this.handleTokenTextFocus}
                 />
               </div>
-              <div className={classes.saveButtonContainer}>
+              <div className={classes.buttonContainer}>
                 <FlatButton onClick={this.handleTokenSaveButton}>
                   Save
                 </FlatButton>

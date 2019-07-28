@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  padding-bottom: 60px;
 }
 
 .loaderContainer {
@@ -63,10 +64,17 @@
   box-shadow: var(--shadow-2dp);
 }
 
-.saveButtonContainer {
+.buttonContainer {
   display: flex;
   justify-content: flex-end;
-  padding-top: 12px;
+}
+
+.buttonContainer>button:not(:last-child) {
+  margin-right: 12px;
+}
+
+.buttonContainer.paddingBottom {
+  padding-bottom: 16px;
 }
 
 .repoSourceEntryContainer {

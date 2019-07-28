@@ -1,3 +1,5 @@
+import {groupBy} from 'ramda';
+
 // From https://github.com/github-tools/github/blob/master/lib/Requestable.js
 const getNextPage = function (linksHeader) {
   const links = (linksHeader || '').split(/\s*,\s*/); // splits and strips the urls
@@ -15,11 +17,13 @@ const buildRepoFullName = function ({repo, defaultRepoSource}) {
 };
 
 const buildActionStr = function ({actionName, optionalFilter, defaultAction, savedActions}) {
+  const savedActionsObj = groupBy((action) => action.name, savedActions);
+
   if (!actionName) {
     return defaultAction && `/${defaultAction}`;
   }
 
-  const {action, filter: defaultFilter} = savedActions[actionName];
+  const {action, filter: defaultFilter} = savedActionsObj[actionName];
   const filter = optionalFilter || defaultFilter;
 
   if (!filter) return `/${action}`;

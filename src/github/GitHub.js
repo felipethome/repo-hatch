@@ -4,12 +4,12 @@ import API from './GitHubAPI';
 import Adapter from './GitHubAdapter';
 import Storage from '../common/Storage';
 
-const defaultActions = {
-  p: {id: uuidv4(), name: 'p', action: 'pulls'},
-  i: {id: uuidv4(), name: 'i', action: 'issues'},
-  t: {id: uuidv4(), name: 't', action: 'find/master'},
-  s: {id: uuidv4(), name: 's', action: 'search'},
-};
+const defaultActions = [
+  {id: uuidv4(), name: 'p', action: 'pulls'},
+  {id: uuidv4(), name: 'i', action: 'issues'},
+  {id: uuidv4(), name: 't', action: 'find/master'},
+  {id: uuidv4(), name: 's', action: 'search'},
+];
 
 const getDefaultRepoSource = async function () {
   const savedOptions = await Storage.get({defaults: {}, user: {}});
@@ -29,7 +29,10 @@ const getDefaults = async function () {
 
 const updateDefaults = async function (defaults) {
   const savedDefaults = await getDefaults();
-  return Storage.set({defaults: Object.assign(savedDefaults, defaults)});
+  const newDefaults = Object.assign(savedDefaults, defaults);
+  await Storage.set({defaults: newDefaults});
+
+  return newDefaults;
 };
 
 const getUser = async function () {
@@ -98,6 +101,11 @@ const getSavedActions = async function () {
   return (await Storage.get({actions: defaultActions})).actions;
 };
 
+const updateSavedActions = async function (actions) {
+  await Storage.set({actions: actions});
+  return actions;
+};
+
 const getEverything = function () {
   return Storage.get(null);
 };
@@ -118,5 +126,6 @@ export default {
   updateToken,
   getDefaultAction,
   getSavedActions,
+  updateSavedActions,
   getEverything,
 };
