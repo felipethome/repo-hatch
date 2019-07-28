@@ -25,6 +25,17 @@ describe('github logic', () => {
     expect(actionStr).toEqual('/pulls?utf8=%E2%9C%93&q=author:felipethome');
   });
 
+  it('correctly builds the action part of the url when there is no action', () => {
+    const actionStr = GitHubLogic.buildActionStr({
+      actionName: '',
+      optionalFilter: 'author:felipethome',
+      defaultAction: '',
+      savedActions: {p: {action: 'pulls'}},
+    });
+
+    expect(actionStr).toEqual('');
+  });
+
   it('correctly builds the action part of the url using the default action', () => {
     const actionStr = GitHubLogic.buildActionStr({
       actionName: '',
