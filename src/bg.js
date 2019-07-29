@@ -70,7 +70,7 @@ const Bg = (function () {
 
 window.Bg = Bg;
 
-chrome.browserAction.onClicked.addListener((tab) => {
+chrome.browserAction.onClicked.addListener(() => {
   chrome.runtime.openOptionsPage();
 });
 
