@@ -70,9 +70,9 @@ export default class Actions extends React.Component {
         <table className={classes.actionsTable}>
           <thead>
             <tr>
-              <th>Action name</th>
+              <th>Action alias</th>
               <th>Action</th>
-              <th>Optional Filter</th>
+              <th>Optional filter</th>
             </tr>
           </thead>
           <tbody>
