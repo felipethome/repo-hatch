@@ -29,7 +29,7 @@
 .optionsSection>h2 {
   padding-bottom: 0;
   width: 100%;
-  color: var(--text-color);
+  color: var(--header-text-color);
   font-size: 12px;
 }
 
@@ -117,7 +117,7 @@
   height: 24px;
   line-height: 100%;
   text-align: left;
-  color: var(--secondary-text-color);
+  color: var(--header-text-color);
   border-bottom: 1px solid var(--divisor-border-color);
 }
 

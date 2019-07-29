@@ -13,6 +13,7 @@
   --secondary-text-color: rgba(0, 0, 0, .54);
   --primary-bg-text-color: #F5F5F5;
   --accent-bg-text-color: #F5F5F5;
+  --header-text-color: rgba(0, 0, 0, .54);
   --disabled-text-color: rgba(0, 0, 0, .26);
   --label-text-color: #4CAF50;
 
@@ -44,6 +45,7 @@
     --secondary-text-color: #9E9E9E;
     --primary-bg-text-color: #F5F5F5;
     --accent-bg-text-color: #F5F5F5;
+    --header-text-color: #F5F5F5;
     --disabled-text-color: #9E9E9E;
     --label-text-color: #4CAF50;
   
