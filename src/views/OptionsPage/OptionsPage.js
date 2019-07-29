@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from '../material/FlatButton';
+import RaisedButton from '../material/RaisedButton';
 import Navbar from '../material/Navbar';
 import TextField from '../material/TextField';
 import CircularIndicator from '../material/CircularIndicator/Indeterminate';
@@ -127,14 +128,14 @@ export default class OptionsPage extends React.Component {
       <div className={classes.container}>
         <Navbar title="RepoHatch" />
         {process.env.NODE_ENV === 'development' ?
-          <FlatButton
+          <RaisedButton
             onClick={() => {
               GitHub.getEverything().then((options) => console.log('options', options));
             }}
             style={{margin: '12px auto'}}
           >
-            Get saved options
-          </FlatButton> : null}
+            Print Saved Options
+          </RaisedButton> : null}
 
         <div className={classes.optionsContainer}>
           <div className={classes.optionsSection}>
