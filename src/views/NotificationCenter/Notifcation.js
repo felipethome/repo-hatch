@@ -27,7 +27,7 @@ export default class Notification extends React.Component {
   }
 
   render() {
-    const {message, onClose, type} = this.props;
+    const {id, message, onClose, type} = this.props;
 
     return (
       <div
@@ -39,7 +39,7 @@ export default class Notification extends React.Component {
         )}
       >
         {message}
-        <IconButton onClick={onClose}>
+        <IconButton onClick={() => {onClose({id});}}>
           <CloseIcon className={classes.closeIcon} />
         </IconButton>
       </div>
