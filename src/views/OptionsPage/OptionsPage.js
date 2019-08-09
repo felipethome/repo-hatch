@@ -31,13 +31,16 @@ export default class OptionsPage extends React.Component {
   componentDidMount() {
     GitHub.getToken()
       .then((token) => {
-        if (token) this.initialize(`${token.slice(0, 5)}${token ? '...' : ''}`);
+        if (token) {
+          this.setState({token: `${token.slice(0, 5)}${token ? '...' : ''}`});
+          this.initialize();
+        }
       });
   }
 
-  initialize = (token) => {
+  initialize = () => {
     this.props.bg.updateBadge('');
-    const newState = {token};
+    const newState = {};
 
     this.setLoadingState('initializing', true);
 
@@ -131,7 +134,7 @@ export default class OptionsPage extends React.Component {
 
     return (
       <div className={classes.container}>
-        <NoticationCenter timeout={4000} ref={(ref) => {this.nc = ref;}} />
+        <NoticationCenter timeout={8000} ref={(ref) => {this.nc = ref;}} />
         <Navbar title="RepoHatch" />
         {process.env.NODE_ENV === 'development' ?
           <RaisedButton
