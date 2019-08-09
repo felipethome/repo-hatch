@@ -16,8 +16,10 @@ export default class Notification extends React.Component {
   };
 
   componentDidMount() {
-    const {onClose, timeout} = this.props;
-    if (timeout) this.timeoutId = window.setTimeout(onClose, timeout);
+    const {onClose, id, timeout} = this.props;
+    if (timeout) this.timeoutId = window.setTimeout(() => {
+      onClose({id});
+    }, timeout);
   }
 
   componentWillUnmount() {

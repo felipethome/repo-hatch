@@ -131,7 +131,7 @@ export default class OptionsPage extends React.Component {
 
     return (
       <div className={classes.container}>
-        <NoticationCenter ref={(ref) => {this.nc = ref;}} />
+        <NoticationCenter timeout={4000} ref={(ref) => {this.nc = ref;}} />
         <Navbar title="RepoHatch" />
         {process.env.NODE_ENV === 'development' ?
           <RaisedButton
