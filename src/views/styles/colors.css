@@ -22,8 +22,12 @@
   --disabled-border-color: #E0E0E0;
   --button-border-color: #4CAF5050;
 
-  --snackbar-background-color: #323232;
-  --snackbar-text-color: #F5F5F5;
+  --notification-success-text-color: #43A047;
+  --notification-success-background-color: #323232;
+  --notification-fail-text-color: #F44336;
+  --notification-fail-background-color: #323232;
+  --notification-info-text-color: #F5F5F5;
+  --notification-info-background-color: #323232;
 
   --flat-button-hover-background-color: #EFEFEF;
   --raised-button-hover-background-color: #43A047;
@@ -53,9 +57,13 @@
     --divisor-border-color: #424242;
     --disabled-border-color: rgba(0, 0, 0, .54);
     --button-border-color: #4CAF5050;
-  
-    --snackbar-background-color: #323232;
-    --snackbar-text-color: #F5F5F5;
+
+    --notification-success-text-color: #43A047;
+    --notification-success-background-color: #323232;
+    --notification-fail-text-color: #F44336;
+    --notification-fail-background-color: #323232;
+    --notification-info-text-color: #F5F5F5;
+    --notification-info-background-color: #323232;
 
     --flat-button-hover-background-color: #424242;
     --raised-button-hover-background-color: #43A047;

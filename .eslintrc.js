@@ -106,10 +106,10 @@ module.exports = {
     'jsx-quotes': [ERROR, 'prefer-double'],
     'react/display-name': ERROR,
     'react/jsx-boolean-value': ERROR,
-    'react/jsx-closing-bracket-location': ERROR,
+    'react/jsx-closing-bracket-location': OFF,
     'react/jsx-curly-spacing': ERROR,
     'react/jsx-handler-names': [
-      ERROR, {'eventHandlerPrefix': '_?handle', 'eventHandlerPropPrefix': 'on'}
+      OFF, {'eventHandlerPrefix': '_?handle', 'eventHandlerPropPrefix': 'on'}
     ],
     'react/jsx-indent-props': OFF,
     'react/jsx-indent': [ERROR, ERROR],

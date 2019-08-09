@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NoticationCenter from '../NotificationCenter';
 import FlatButton from '../material/FlatButton';
 import RaisedButton from '../material/RaisedButton';
 import Navbar from '../material/Navbar';
@@ -126,6 +127,7 @@ export default class OptionsPage extends React.Component {
 
     return (
       <div className={classes.container}>
+        <NoticationCenter ref={(ref) => {this.nc = ref;}} />
         <Navbar title="RepoHatch" />
         {process.env.NODE_ENV === 'development' ?
           <RaisedButton
