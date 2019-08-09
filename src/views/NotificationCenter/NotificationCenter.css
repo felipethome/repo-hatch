@@ -16,6 +16,10 @@
   border-radius: 0;
 }
 
+.notification:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .notification.success {
   color: var(--notification-success-text-color);
   background: var(--notification-success-background-color);
