@@ -69,6 +69,9 @@ export default class RepoDownload extends React.Component {
       .then((repos) => {
         if (this.props.downloadFinished) this.props.downloadFinished(repos);
       })
+      .catch((err) => {
+        console.error(err);
+      })
       .finally(() => {
         this.setLoadingState(name, false);
       });

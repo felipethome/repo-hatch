@@ -50,6 +50,10 @@ export default class OptionsPage extends React.Component {
         newState.orgs = orgs;
         return this.setState(() => newState);
       })
+      .catch((err) => {
+        console.error(err);
+        this.nc.create({type: 'fail', message: err.message});
+      })
       .finally(() => {
         this.setLoadingState('initializing', false);
       });

@@ -23,7 +23,6 @@ const updateUser = async function () {
   const response = await API.getUser();
   const user = Adapter.adaptUser(response.body);
   await Storage.set({user});
-
   return user;
 };
 

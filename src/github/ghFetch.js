@@ -14,11 +14,18 @@ const ghFetch = async function (path, options = {}, fullPath = false) {
     .then((r) => {
       response.headers = r.headers;
       response.status = r.status;
+      response.statusText = r.statusText;
+      response.ok = r.ok;
       return r.json();
     })
     .then((r) => {
-      response.body = camelcaseKeys(r, {deep: true});
-      return response;
+      if (response.ok) {
+        response.body = camelcaseKeys(r, {deep: true});
+        return response;
+      }
+      else {
+        throw Error(r.message);
+      }
     });
 };
 

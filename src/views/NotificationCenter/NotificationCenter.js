@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {insert} from 'ramda';
 import uuidv4 from 'uuid/v4';
 import Notification from './Notifcation';
@@ -6,6 +7,10 @@ import Notification from './Notifcation';
 import classes from './NotificationCenter.css';
 
 export default class NotifcationCenter extends React.Component {
+  static propTypes = {
+    timeout: PropTypes.number,
+  };
+
   state = {
     notifications: [],
   };
@@ -24,6 +29,7 @@ export default class NotifcationCenter extends React.Component {
 
   render() {
     const {notifications} = this.state;
+    const {timeout} = this.props;
 
     return (
       <div className={classes.container}>
@@ -34,6 +40,7 @@ export default class NotifcationCenter extends React.Component {
             type={notification.type}
             message={notification.message}
             onClose={this.destroy}
+            timeout={timeout}
           />
         ))}
       </div>

@@ -33,7 +33,7 @@ export default class Notification extends React.Component {
           classes.notification,
           type === 'success' && classes.success,
           type === 'fail' && classes.fail,
-          (type === 'info' || type === undefined) && classes.info
+          (type === 'info' || !type) && classes.info
         )}
       >
         {message}
