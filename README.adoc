@@ -20,7 +20,7 @@ https://chrome.google.com/webstore/detail/repohatch/icpdemogjmfknfllfelpkejliabh
 
 [NOTE]
 --
-After install you will need to open the options page to insert your GitHub token and download your repos, see `Configure` section for more details. To activate the extension press `h` and then `tab`.
+After install you will need to open the options page to insert your GitHub token and download your repository names, see `Configure` section for more details. To activate the extension press `h` and then `tab`.
 --
 
 == Configure
