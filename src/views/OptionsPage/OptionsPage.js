@@ -118,7 +118,7 @@ export default class OptionsPage extends React.Component {
           <div className={classes.optionsSection}>
             <h2>Actions</h2>
             <div className={classes.card}>
-              <Actions />
+              <Actions nc={this.nc} />
             </div>
           </div>
         </React.Fragment>

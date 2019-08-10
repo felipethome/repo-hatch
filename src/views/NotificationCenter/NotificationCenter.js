@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {insert} from 'ramda';
 import uuidv4 from 'uuid/v4';
-import Notification from './Notifcation';
 import Transition from 'react-inline-transition-group';
+import Notification from './Notifcation';
 
 import classes from './NotificationCenter.css';
 

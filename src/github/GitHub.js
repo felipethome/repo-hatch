@@ -81,8 +81,17 @@ const getSavedActions = async function () {
 };
 
 const updateSavedActions = async function (actions) {
+  actions.forEach((action) => {
+    if (!action.name) throw Error("Can't save an action without an alias.");
+  });
+
   await Storage.set({actions: actions});
   return actions;
+};
+
+const removeAction = async function (id) {
+  const actions = await getSavedActions();
+  return updateSavedActions(actions.filter((action) => action.id !== id));
 };
 
 const getEverything = function () {
@@ -103,5 +112,6 @@ export default {
   getDefaultAction,
   getSavedActions,
   updateSavedActions,
+  removeAction,
   getEverything,
 };

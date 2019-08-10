@@ -1,16 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import {flatten, groupBy, insert} from 'ramda';
+import uuidv4 from 'uuid/v4';
 import FlatButton from '../material/FlatButton';
 import TextField from '../material/TextField';
 import Select from '../material/Select';
+import CloseIcon from '../material/icons/navigation/close';
+import IconButton from '../material/IconButton';
 import GitHub from '../../github/GitHub';
-import uuidv4 from 'uuid/v4';
 
 import classes from './OptionsPage.css';
 
 export default class Actions extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    nc: PropTypes.any,
+  };
 
   static defaultProps = {};
 
@@ -41,7 +46,8 @@ export default class Actions extends React.Component {
   };
 
   handleSaveButtonClick = () => {
-    GitHub.updateSavedActions(this.state.actions);
+    GitHub.updateSavedActions(this.state.actions)
+      .catch((err) => this.props.nc.create({type: 'fail', message: err.message}));
   };
 
   handleChange = (id, attr, e) => {
@@ -53,6 +59,17 @@ export default class Actions extends React.Component {
 
       return {
         actions: flatten(Object.values(actionsById)),
+      };
+    });
+  };
+
+  handleRemoveButtonClick = (id) => {
+    this.setState((previousState) => {
+      const actions = previousState.actions.filter((action) => action.id !== id);
+      GitHub.removeAction(id);
+
+      return {
+        actions,
       };
     });
   };
@@ -96,6 +113,11 @@ export default class Actions extends React.Component {
                     value={action.filter || ''}
                     onChange={this.handleChange.bind(this, action.id, 'filter')}
                   />
+                </td>
+                <td>
+                  <IconButton onClick={() => {this.handleRemoveButtonClick(action.id);}}>
+                    <CloseIcon className={classes.removeIcon} />
+                  </IconButton>
                 </td>
               </tr>
             ))}
