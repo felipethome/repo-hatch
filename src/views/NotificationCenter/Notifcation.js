@@ -27,7 +27,8 @@ export default class Notification extends React.Component {
   }
 
   render() {
-    const {id, message, onClose, type} = this.props;
+    // eslint-disable-next-line no-unused-vars
+    const {id, message, onClose, timeout, type, ...others} = this.props;
 
     return (
       <div
@@ -37,6 +38,7 @@ export default class Notification extends React.Component {
           type === 'fail' && classes.fail,
           (type === 'info' || !type) && classes.info
         )}
+        {...others}
       >
         {message}
         <IconButton onClick={() => {onClose({id});}}>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {insert} from 'ramda';
 import uuidv4 from 'uuid/v4';
 import Notification from './Notifcation';
+import Transition from 'react-inline-transition-group';
 
 import classes from './NotificationCenter.css';
 
@@ -32,7 +33,14 @@ export default class NotifcationCenter extends React.Component {
     const {timeout} = this.props;
 
     return (
-      <div className={classes.container}>
+      <Transition
+        className={classes.container}
+        childrenStyles={{
+          base: {transition: 'all 200ms', opacity: '0'},
+          enter: {opacity: '1'},
+          leave: {opacity: '0'},
+        }}
+      >
         {notifications.map((notification) => (
           <Notification
             key={notification.id}
@@ -43,7 +51,7 @@ export default class NotifcationCenter extends React.Component {
             timeout={timeout}
           />
         ))}
-      </div>
+      </Transition>
     );
   }
 }
