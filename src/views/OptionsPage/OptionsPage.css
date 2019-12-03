@@ -104,7 +104,7 @@
 
 .repoSourceEntryImage {
   width: 52px;
-  height: auto;
+  height: 52px;
 }
 
 .actionsTable {
@@ -139,7 +139,7 @@
 }
 
 .removeIcon {
-  fill: #FFF;
+  fill: var(--text-color);
   width: 24px;
   height: 24px;
 }
