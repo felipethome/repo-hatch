@@ -8,7 +8,7 @@
 :warning-caption: :warning:
 :imagesdir: ./docs/img
 
-= RepoHatch
+= RepoHatch for GitHub™
 
 Chrome extension that helps you to access your repositories pages with the minimum effort from the address bar.
 
