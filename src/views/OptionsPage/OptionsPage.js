@@ -83,7 +83,7 @@ export default class OptionsPage extends React.Component {
   };
 
   handleTokenSaveButton = () => {
-    if (this.state.token.length === 40) {
+    if (this.state.token.length >= 40) {
       GitHub.updateToken(this.state.token)
         .then(() => {
           this.initialize(this.state.token);
